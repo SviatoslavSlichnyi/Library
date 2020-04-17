@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <title>Library | Add Book</title>
+
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="../../resources/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="body">
+    
+     <!-- Navigation bar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <img src="https://cdn0.iconfinder.com/data/icons/education-and-learning-10/64/Books-512.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            Library
+        </a>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                <a class="nav-link" href="books">Books</a>
+                </li>            
+
+            </ul>
+
+            <!-- Search -->
+            <!-- <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> -->
+
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User</a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#" class="dropdown-item">My Account</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">My Books</a>
+                        <a href="#" class="dropdown-item">Saved Books</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#"class="dropdown-item">Logout</a>
+                    </div>
+                </li>
+            </ul>
+
+            <a id="login-btn" href="login">Login</a>
+        </div>
+    </nav>
+    
+
+
+    <div class="container mt-2 marg-b-5">
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+        <div class="card">
+        <header class="card-header">
+            <h4 class="card-title mt-2">New Book</h4>
+        </header>
+        <article class="card-body">
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01">
+                      <label class="custom-file-label" for="inputGroupFile01">Upload Book Hardcover</label>
+                    </div>
+                  </div>
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="">
+            </div> <!-- form-group end.// -->
+            <div class="form-row">
+                <div class="col form-group">
+                    <label>Author first name </label>   
+                    <div id="first-name-error" class="invalid-text"></div>
+                    <input type="text" class="form-control" placeholder="">
+                </div> <!-- form-group end.// -->
+                <div class="col form-group">
+                    <label>Author last name</label>
+                    <div id="last-name-error" class="invalid-text"></div>
+                    <input type="text" class="form-control" placeholder=" ">
+                </div> <!-- form-group end.// -->
+            </div> <!-- form-row end.// -->
+            <div class="form-group">
+                <label>Publisher</label>
+                <div id="r-email-error" class="invalid-text"></div>
+                <input type="email" class="form-control" placeholder="">
+            </div> <!-- form-group end.// -->
+            <div class="form-group">
+                <label>Publication year</label>
+                <div id="r-pwd-error" class="invalid-text"></div>
+                <input class="form-control" type="number">
+            </div> <!-- form-group end.// --> 
+            <div class="form-group">
+                <label>Number of pages</label>
+                <div id="r-pwd-error" class="invalid-text"></div>
+                <input class="form-control" type="number">
+            </div> <!-- form-group end.// --> 
+            <div class="form-group">
+                <label>Language</label>
+                <div id="r-pwd-error" class="invalid-text"></div>
+                <input class="form-control" type="text">
+            </div> <!-- form-group end.// -->  
+            <div class="form-group">
+                <label>Description</label>
+                <div id="r-pwd-error" class="invalid-text"></div>
+                <input class="form-control" type="password" rows="5" cols="60">
+            </div> <!-- form-group end.// -->  
+            <div class="form-group">
+                <label>Book file</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01">
+                      <label class="custom-file-label" for="inputGroupFile01">Upload Book</label>
+                    </div>
+                </div>
+                <div class="meta">
+                    <a>Use only .pdf, .epub or .txt type of file.</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-success btn-block btn-signin">Add Book</button>
+            </div> <!-- form-group// -->  
+        </form>
+        </article> <!-- card-body end .// -->
+        </div> <!-- card.// -->
+        </div> <!-- col.//-->
+        
+        </div> <!-- row.//-->
+    </div> 
+    <!--container end.//-->
+
+
+    <!-- Footer -->
+    <footer class="page-footer font-small fixed-bottom">
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+        </div>  
+    </footer>
+
+</body>
+</html>

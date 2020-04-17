@@ -1,0 +1,55 @@
+.body {
+    background-color:#ebebeb;
+}
+
+.meta {
+    font-size: 1em;
+    color: rgba(0, 0, 0, .4);
+}
+
+.dropdown ul.dropdown-menu {
+    border-radius:4px;
+    box-shadow:none;
+    margin-top:20px;
+    width:300px;
+}
+
+#login-btn {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    color: rgba(0,0,0,.5);
+    text-decoration: none;
+    font-size: 17px;
+}
+#login-btn:hover {
+    color: black;
+} 
+
+#cov-cont {
+    margin-top: 20%;
+}
+
+.marg-b-5 {
+    margin-bottom: 5rem;
+}
+
+.marg-b-cards {
+    margin-bottom: 5rem;
+}
+
+.bookcard-w {
+    width: 14rem;
+}
+
+#admin-email-col {
+    width: 60rem;
+}
+
+.wd-5r {
+    width: 5rem;
+}
+
+footer {
+    background-color: #d8d8d8;
+}
