@@ -19,7 +19,6 @@
           <h1 class="cover-heading">Welcome to Library</h1>
           <p class="lead">Read. Write. Share.</p>
           <p class="lead">
-<%--            <a href="registration" class="btn btn-lg btn-secondary">Register now</a>--%>
           </p>
         </main>
   

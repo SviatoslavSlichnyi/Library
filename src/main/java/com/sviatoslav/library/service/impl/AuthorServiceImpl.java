@@ -4,7 +4,6 @@ import com.sviatoslav.library.entity.Author;
 import com.sviatoslav.library.repository.AuthorRepository;
 import com.sviatoslav.library.service.AuthorService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.NotFound;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;

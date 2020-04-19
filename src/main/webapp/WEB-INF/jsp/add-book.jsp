@@ -50,8 +50,7 @@
                     <label>Name</label>
                     <form:input path="name"
                                 type="text"
-                                class="form-control ${status.error ? 'is-invalid' : ''}"
-                                value="Inferno"/>
+                                class="form-control ${status.error ? 'is-invalid' : ''}"/>
                     <div class="text-danger text-center">
                         <form:errors path="name"/>
                     </div>
@@ -64,8 +63,7 @@
                             <label>Author first name </label>
                             <form:input path="authorFirstName"
                                         type="text"
-                                        class="form-control ${status.error ? 'is-invalid' : ''}"
-                                        value="Dan"/>
+                                        class="form-control ${status.error ? 'is-invalid' : ''}"/>
                             <div class="text-danger text-center">
                                 <form:errors path="authorFirstName"/>
                             </div>
@@ -77,8 +75,7 @@
                             <label>Author last name</label>
                             <form:input path="authorLastName"
                                         type="text"
-                                        class="form-control ${status.error ? 'is-invalid' : ''}"
-                                        value="Brawn"/>
+                                        class="form-control ${status.error ? 'is-invalid' : ''}"/>
                             <div class="text-danger text-center">
                                 <form:errors path="authorLastName"/>
                             </div>
@@ -91,8 +88,7 @@
                     <label>Publisher</label>
                     <form:input path="publisher"
                                 type="text"
-                                class="form-control ${status.error ? 'is-invalid' : ''}"
-                                value="Book-Ye"/>
+                                class="form-control ${status.error ? 'is-invalid' : ''}"/>
                     <div class="text-danger text-center">
                         <form:errors path="publisher"/>
                     </div>
@@ -104,8 +100,7 @@
                     <label>Publication year</label>
                     <form:input path="publicationYear"
                                 class="form-control ${status.error ? 'is-invalid' : ''}"
-                                type="number"
-                                value="2018"/>
+                                type="number"/>
                     <div class="text-danger text-center">
                         <form:errors path="publicationYear"/>
                     </div>
@@ -117,8 +112,7 @@
                     <label>Number of pages</label>
                     <form:input path="numberOfPages"
                                 class="form-control ${status.error ? 'is-invalid' : ''}"
-                                type="number"
-                                value="606"/>
+                                type="number"/>
                     <div class="text-danger text-center">
                         <form:errors path="numberOfPages"/>
                     </div>
@@ -130,8 +124,7 @@
                     <label>Language</label>
                     <form:input path="language"
                                 class="form-control ${status.error ? 'is-invalid' : ''}"
-                                type="text"
-                                value="English"/>
+                                type="text"/>
                     <div class="text-danger text-center">
                         <form:errors path="language"/>
                     </div>
@@ -144,8 +137,7 @@
                     <form:input path="description"
                                 class="form-control ${status.error ? 'is-invalid' : ''}"
                                 type="text"
-                                rows="5" cols="60"
-                                value="Cool Book."/>
+                                rows="5" cols="60"/>
                     <div class="text-danger text-center">
                         <form:errors path="description"/>
                     </div>

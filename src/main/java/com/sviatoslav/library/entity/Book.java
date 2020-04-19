@@ -6,8 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @RequiredArgsConstructor
@@ -19,7 +17,7 @@ import java.util.Set;
 public class Book {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     private Long id;
 
@@ -52,11 +50,6 @@ public class Book {
     @NonNull
     @OneToOne
     private Media bookFile;
-
-    @OneToMany(targetEntity = Bucket.class, cascade = CascadeType.ALL)
-    @Builder.Default
-    @EqualsAndHashCode.Exclude
-    @Transient private Set<Bucket> bucket = new HashSet<>();
 
     public void setHardcover(MultipartFile multipartFile) {
         this.hardcoverFile = new MediaMapper().map(multipartFile);
