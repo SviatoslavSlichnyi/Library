@@ -1,6 +1,8 @@
 package com.sviatoslav.library.entity;
 
+import com.sviatoslav.library.controller.mapper.MediaMapper;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -45,7 +47,7 @@ public class Book {
     private String description;
 
     @OneToOne
-    private Media hardcover;
+    private Media hardcoverFile;
 
     @NonNull
     @OneToOne
@@ -55,4 +57,13 @@ public class Book {
     @Builder.Default
     @EqualsAndHashCode.Exclude
     @Transient private Set<Bucket> bucket = new HashSet<>();
+
+    public void setHardcover(MultipartFile multipartFile) {
+        this.hardcoverFile = new MediaMapper().map(multipartFile);
+    }
+
+    public void setMultipartFile(MultipartFile multipartFile) {
+        this.bookFile = new MediaMapper().map(multipartFile);
+    }
+
 }

@@ -20,11 +20,14 @@ public class Media {
 
     @NonNull
     @Column(unique = true, nullable = false)
-    private String fileName;
+    private String name;
+
+    @NonNull
+    private String originalFilename;
 
     @NonNull
     @Column(nullable = false)
-    private String type;
+    private String contentType;
 
     @NonNull
     @Lob

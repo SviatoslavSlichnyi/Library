@@ -3,7 +3,6 @@ package com.sviatoslav.library.entity;
 import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -17,7 +16,6 @@ import javax.validation.constraints.NotNull;
 public class Author {
 
     @Id
-    @GeneratedValue
     @EqualsAndHashCode.Exclude
     private Long id;
 
@@ -28,4 +26,18 @@ public class Author {
     @NonNull
     @NotNull
     private String lastName;
+
+    public Long getId() {
+        return (long) this.hashCode();
+    }
+
+    public void generateAndSetId() {
+        this.id = (long) hashCode();
+    }
+
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }

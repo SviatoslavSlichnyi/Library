@@ -17,9 +17,9 @@ public class MediaServiceImpl implements MediaService {
     private final MediaRepository mediaRepository;
 
     @Override
-    public Media findByFileName(String fileName) {
-        return mediaRepository.findByFileName(fileName).orElseThrow(
-                () -> new EntityNotFoundException("Media with file name \""+fileName+"\" was NOT found."));
+    public Media findByName(String name) {
+        return mediaRepository.findByName(name).orElseThrow(
+                () -> new EntityNotFoundException("Media with file name \""+name+"\" was NOT found."));
     }
 
     @Override

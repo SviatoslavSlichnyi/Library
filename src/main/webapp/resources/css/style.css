@@ -38,6 +38,10 @@
     margin-bottom: 5rem;
 }
 
+.h-18 {
+    height: 18rem;
+}
+
 .bookcard-w {
     width: 14rem;
 }
@@ -48,6 +52,22 @@
 
 .wd-5r {
     width: 5rem;
+}
+
+.wd-12r {
+    width: 12rem;
+}
+
+.fl-left {
+    float: left;
+}
+
+.fl-right {
+    float: right;
+}
+
+.sub-title {
+    color: rgba(0,0,0,.5);
 }
 
 footer {
