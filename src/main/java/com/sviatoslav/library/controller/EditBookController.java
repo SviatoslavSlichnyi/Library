@@ -3,7 +3,7 @@ package com.sviatoslav.library.controller;
 import com.sviatoslav.library.controller.mapper.BookMapper;
 import com.sviatoslav.library.controller.validator.BookFormValidator;
 import com.sviatoslav.library.entity.Book;
-import com.sviatoslav.library.entity.BookForm;
+import com.sviatoslav.library.entity.form.BookForm;
 import com.sviatoslav.library.entity.MediaMultipartFile;
 import com.sviatoslav.library.service.AuthorService;
 import com.sviatoslav.library.service.BookService;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RequiredArgsConstructor
 
@@ -35,7 +36,6 @@ public class EditBookController {
     @GetMapping("/edit-book/{id}")
     public String getEditBookPage(@PathVariable Long id, Model model) {
         Book book = bookService.findById(id);
-
         BookForm bookForm = bookMapper.map(book);
 
         model.addAttribute("bookForm", bookForm);
@@ -44,7 +44,8 @@ public class EditBookController {
 
     @PostMapping("/edit-book/{id}")
     public String updateBook(@Valid @ModelAttribute BookForm bookForm,
-                             @PathVariable Long id, BindingResult bindingResult) {
+                             @PathVariable Long id,
+                             BindingResult bindingResult) {
         log.debug("POST: edit book: " + bookForm);
 
         Book book = bookService.findById(id);

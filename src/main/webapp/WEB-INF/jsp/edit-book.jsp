@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,10 +17,10 @@
 
 <body class="body">
 
-    <jsp:include page="navbar.jsp"/>
+    <c:import url="/nav-bar"/>
 
     <div class="container bootstrap snippet marg-b-5">
-        <form:form modelAttribute="bookForm" action="${pageContext.request.contextPath}/edit-book/${bookForm.id}"
+        <form:form modelAttribute="bookForm" action="${contextPath}/edit-book/${bookForm.id}"
                    class="form"  method="post" enctype="multipart/form-data">
 
             <div class="row mt-4">

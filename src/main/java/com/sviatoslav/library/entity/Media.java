@@ -23,6 +23,7 @@ public class Media {
     private String name;
 
     @NonNull
+    @Column(nullable = false)
     private String originalFilename;
 
     @NonNull

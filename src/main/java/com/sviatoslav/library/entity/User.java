@@ -21,15 +21,16 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Exclude
     private Long id;
 
     @NonNull
     @NotNull
+    @Column(unique = true, nullable = false)
     private String username;
 
     @NonNull
     @NotNull
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NonNull
@@ -40,29 +41,21 @@ public class User implements UserDetails {
 
     @NonNull
     @NotNull
+    @Column(nullable = false)
     private String password;
-
-    @Transient
-    @EqualsAndHashCode.Exclude
-    private String passwordConfirm;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @Builder.Default
     private Set<Role> roles = new HashSet<>();
 
-    @EqualsAndHashCode.Exclude
-    @OneToOne
-    private Media icon;
-
-    @OneToMany(targetEntity = Bucket.class, cascade = CascadeType.ALL)
     @Builder.Default
     @EqualsAndHashCode.Exclude
+    @OneToMany(targetEntity = Bucket.class, cascade = CascadeType.ALL)
     @Transient private Set<Bucket> bucket = new HashSet<>();
 
     public boolean addRole(Role role) {
         return roles.add(role);
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

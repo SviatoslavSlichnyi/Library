@@ -27,5 +27,6 @@ public class Bucket {
     private Book book;
 
     @NonNull
+    @Column(nullable = false)
     private LocalDateTime purchaseDate;
 }

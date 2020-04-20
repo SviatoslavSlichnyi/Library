@@ -8,7 +8,11 @@ public interface UserService extends CrudService<User, Long> {
 
     User findByEmail(String email);
 
+    User findByUsername(String username);
+
     boolean existsByEmail(String email);
+
+    boolean existsByUsername(String username);
 
     Optional<Long> findIdByEmail(String email);
 

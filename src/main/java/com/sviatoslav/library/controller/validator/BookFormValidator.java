@@ -1,6 +1,6 @@
 package com.sviatoslav.library.controller.validator;
 
-import com.sviatoslav.library.entity.BookForm;
+import com.sviatoslav.library.entity.form.BookForm;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

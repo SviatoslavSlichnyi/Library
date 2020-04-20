@@ -1,4 +1,4 @@
-package com.sviatoslav.library.entity;
+package com.sviatoslav.library.entity.form;
 
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;

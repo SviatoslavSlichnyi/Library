@@ -1,4 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,14 +15,14 @@
 
 <body class="body">
 
-    <jsp:include page="navbar.jsp"/>
+    <c:import url="/nav-bar"/>
 
     <div class="container bootstrap snippet marg-b-5">
         <div class="row mt-4">
             <div class="col-sm-3">
                 <!--left col-->
                 <div class="text-center">
-                    <img src="${pageContext.request.contextPath}/media/${book.hardcoverFile.id}"
+                    <img src="${contextPath}/media/${book.hardcoverFile.id}"
                          class="avatar img-circle img-thumbnail wd-12r"
                          alt="hardcover">
                 </div>
@@ -31,7 +34,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
 <%--                        <button type="button" class="btn btn-warning w-100 mb-2">Save</button>--%>
-                        <a class="mt-4" href="${pageContext.request.contextPath}/media/${book.bookFile.id}" download>
+                        <a class="mt-4" href="${contextPath}/media/${book.bookFile.id}" download>
                             <button type="button" class="btn btn-outline-success w-100">Download</button>
                         </a>
                     </div>
@@ -45,7 +48,7 @@
                         <h1>Book</h1>
                     </div>
                     <div class="w-50 fl-left">
-                        <a href="${pageContext.request.contextPath}/edit-book/${book.id}">
+                        <a href="${contextPath}/edit-book/${book.id}">
                             <button type="button" class="btn btn-secondary mt-2 float-right">Edit</button>
                         </a>
                     </div>

@@ -4,10 +4,7 @@ import com.sviatoslav.library.entity.enumeration.UserRole;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -18,11 +15,12 @@ public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     @EqualsAndHashCode.Exclude
+    @NonNull
     private Long id;
 
     @NonNull
+    @Column(nullable = false)
     private String name;
 
     public Role(UserRole role) {

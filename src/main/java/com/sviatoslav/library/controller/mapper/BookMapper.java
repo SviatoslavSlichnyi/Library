@@ -2,7 +2,7 @@ package com.sviatoslav.library.controller.mapper;
 
 import com.sviatoslav.library.entity.Author;
 import com.sviatoslav.library.entity.Book;
-import com.sviatoslav.library.entity.BookForm;
+import com.sviatoslav.library.entity.form.BookForm;
 import com.sviatoslav.library.entity.Media;
 import org.springframework.stereotype.Component;
 

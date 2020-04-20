@@ -16,7 +16,6 @@ import javax.validation.constraints.NotNull;
 public class Author {
 
     @Id
-    @EqualsAndHashCode.Exclude
     private Long id;
 
     @NonNull
