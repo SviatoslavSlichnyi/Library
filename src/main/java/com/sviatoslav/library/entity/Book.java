@@ -1,8 +1,6 @@
 package com.sviatoslav.library.entity;
 
-import com.sviatoslav.library.controller.mapper.MediaMapper;
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,9 +22,19 @@ public class Book {
     @NotNull
     private String name;
 
-    @NonNull
-    @OneToOne
+    @NotNull
+    @ManyToOne
     private Author author;
+
+    @NonNull
+    @NotNull
+    @OneToOne
+    private Media bookFile;
+
+    @NonNull
+    @NotNull
+    @ManyToOne
+    private User user;
 
     @NonNull
     private String publisher;
@@ -45,17 +53,4 @@ public class Book {
 
     @OneToOne
     private Media hardcoverFile;
-
-    @NonNull
-    @OneToOne
-    private Media bookFile;
-
-    public void setHardcover(MultipartFile multipartFile) {
-        this.hardcoverFile = new MediaMapper().map(multipartFile);
-    }
-
-    public void setMultipartFile(MultipartFile multipartFile) {
-        this.bookFile = new MediaMapper().map(multipartFile);
-    }
-
 }

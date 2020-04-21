@@ -3,16 +3,15 @@ package com.sviatoslav.library.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Builder
 
 @Entity
-public class Bucket {
+public class SavedBooks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,13 +19,9 @@ public class Bucket {
 
     @NonNull
     @ManyToOne
-    private User user;
-
-    @NonNull
-    @ManyToOne
     private Book book;
 
     @NonNull
-    @Column(nullable = false)
-    private LocalDateTime purchaseDate;
+    @ManyToOne
+    private User user;
 }

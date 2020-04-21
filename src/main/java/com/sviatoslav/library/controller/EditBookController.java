@@ -3,11 +3,11 @@ package com.sviatoslav.library.controller;
 import com.sviatoslav.library.controller.mapper.BookMapper;
 import com.sviatoslav.library.controller.validator.BookFormValidator;
 import com.sviatoslav.library.entity.Book;
-import com.sviatoslav.library.entity.form.BookForm;
 import com.sviatoslav.library.entity.MediaMultipartFile;
-import com.sviatoslav.library.service.AuthorService;
+import com.sviatoslav.library.entity.form.BookForm;
 import com.sviatoslav.library.service.BookService;
 import com.sviatoslav.library.service.MediaService;
+import com.sviatoslav.library.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @RequiredArgsConstructor
 
@@ -28,8 +27,8 @@ import java.security.Principal;
 public class EditBookController {
 
     private final BookFormValidator bookFormValidator;
+    private final UserService userService;
     private final BookService bookService;
-    private final AuthorService authorService;
     private final MediaService mediaService;
     private final BookMapper bookMapper;
 
@@ -67,12 +66,8 @@ public class EditBookController {
             return "edit-book";
         }
 
-        Book editedBook = bookMapper.map(bookForm);
-
-        authorService.save(editedBook.getAuthor());
-        mediaService.save(editedBook.getHardcoverFile());
-        mediaService.save(editedBook.getBookFile());
-        bookService.update(editedBook);
+        Book editedBook = bookMapper.map(bookForm, book.getUser());
+        bookService.updateWithFields(editedBook);
 
         return "redirect:/book/" + id;
     }

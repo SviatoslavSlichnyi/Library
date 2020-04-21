@@ -1,6 +1,7 @@
 package com.sviatoslav.library.service.impl;
 
 import com.sviatoslav.library.entity.User;
+import com.sviatoslav.library.entity.enumeration.UserRole;
 import com.sviatoslav.library.repository.UserRepository;
 import com.sviatoslav.library.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,13 +24,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(
-                () -> new EntityNotFoundException("User with email \""+email+"\" was NOT found."));
+                () -> new EntityNotFoundException(String.format("User with email \"%s\" was NOT found.", email)));
     }
 
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(
-                () -> new EntityNotFoundException("User with username \""+username+"\" was NOT found."));
+                () -> new EntityNotFoundException(String.format("User with username \"%s\" was NOT found.", username)));
     }
 
     @Override
@@ -59,7 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("User with id \""+id+"\" was NOT found."));
+                () -> new EntityNotFoundException(String.format("User with id \"%d\" was NOT found.", id)));
     }
 
     @Override

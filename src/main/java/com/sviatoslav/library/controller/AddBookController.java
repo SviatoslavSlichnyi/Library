@@ -3,12 +3,11 @@ package com.sviatoslav.library.controller;
 import com.sviatoslav.library.controller.mapper.BookMapper;
 import com.sviatoslav.library.controller.validator.BookFormValidator;
 import com.sviatoslav.library.entity.Book;
+import com.sviatoslav.library.entity.User;
 import com.sviatoslav.library.entity.form.BookForm;
-import com.sviatoslav.library.service.AuthorService;
 import com.sviatoslav.library.service.BookService;
-import com.sviatoslav.library.service.MediaService;
+import com.sviatoslav.library.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,36 +23,33 @@ import java.security.Principal;
 @Controller
 public class AddBookController {
 
-    private final AuthorService authorService;
-    private final MediaService mediaService;
+    private final UserService userService;
     private final BookService bookService;
     private final BookFormValidator bookFormValidator;
     private final BookMapper bookMapper;
 
     @GetMapping("/add-book")
-    public String getAddBookPage(Model model, Principal principal) {
+    public String getAddBookPage(Model model) {
         model.addAttribute("bookForm", new BookForm());
-
         return "add-book";
     }
 
     @PostMapping("/add-book")
     public String addBook(@Valid @ModelAttribute BookForm bookForm,
-                          BindingResult bindingResult) {
-
+                          BindingResult bindingResult,
+                          Principal principal) {
         bookFormValidator.validate(bookForm, bindingResult);
         if (bindingResult.hasErrors()) {
             return "add-book";
         }
 
-        Book book = bookMapper.map(bookForm);
+        String username = principal.getName();
+        User user = userService.findByUsername(username);
 
-        authorService.save(book.getAuthor());
-        mediaService.save(book.getHardcoverFile());
-        mediaService.save(book.getBookFile());
-        bookService.save(book);
+        Book book = bookMapper.map(bookForm, user);
+        bookService.saveBookAndFields(book);
 
-        return "redirect:/books";
+        return "redirect:/my-books";
     }
 
 }

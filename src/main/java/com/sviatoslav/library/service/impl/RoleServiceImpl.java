@@ -1,6 +1,7 @@
 package com.sviatoslav.library.service.impl;
 
 import com.sviatoslav.library.entity.Role;
+import com.sviatoslav.library.entity.enumeration.UserRole;
 import com.sviatoslav.library.repository.RoleRepository;
 import com.sviatoslav.library.service.RoleService;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> findAll() {
         return roleRepository.findAll();
+    }
+
+    @Override
+    public Role find(UserRole role) {
+        return roleRepository.findById(role.getId()).orElseThrow(
+                () -> new EntityNotFoundException("Role \""+role.toString()+"\" was NOT found."));
+
     }
 }

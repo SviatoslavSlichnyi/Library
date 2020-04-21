@@ -24,7 +24,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author findById(Long id) {
         return authorRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Author with id \""+id+"\" was NOT found."));
+                () -> new EntityNotFoundException(String.format("Author with id \"%d\" was NOT found.", id)));
     }
 
     @Override
@@ -45,5 +45,16 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> findAll() {
         return authorRepository.findAll();
+    }
+
+    @Override
+    public Author findByFirstNameAndLastName(String firstName, String lastName) {
+        return authorRepository.findByFirstNameAndLastName(firstName, lastName).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Author \"%s %s\" was NOT found.", firstName, lastName)));
+    }
+
+    @Override
+    public boolean existsByFirstNameAndLastName(String firstName, String lastName) {
+        return authorRepository.existsByFirstNameAndLastName(firstName, lastName);
     }
 }

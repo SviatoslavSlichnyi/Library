@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -19,6 +20,7 @@
 
     <div class="container bootstrap snippet marg-b-5">
         <div class="row mt-4">
+            <%--Left--%>
             <div class="col-sm-3">
                 <!--left col-->
                 <div class="text-center">
@@ -33,7 +35,16 @@
 
                 <div class="panel panel-default">
                     <div class="panel-body">
-<%--                        <button type="button" class="btn btn-warning w-100 mb-2">Save</button>--%>
+                        <c:if test="${isUser == true && isSaved != true}">
+                            <form:form method="post" action="${contextPath}/saved-books/save/${book.id}">
+                                <button type="submit" class="btn btn-warning w-100 mb-2">Save</button>
+                            </form:form>
+                        </c:if>
+                        <c:if test="${isSaved == true}">
+                            <a href="${contextPath}/saved-books">
+                                <button type="submit" class="btn btn-secondary w-100 mb-2">Go to Saved Books</button>
+                            </a>
+                        </c:if>
                         <a class="mt-4" href="${contextPath}/media/${book.bookFile.id}" download>
                             <button type="button" class="btn btn-outline-success w-100">Download</button>
                         </a>
@@ -41,6 +52,7 @@
                 </div>
             </div><!--/col-3-->
 
+            <%--Center--%>
             <div class="col-sm-9">
                 <!-- Title -->
                 <div class="col-sm w-100">
@@ -48,13 +60,16 @@
                         <h1>Book</h1>
                     </div>
                     <div class="w-50 fl-left">
-                        <a href="${contextPath}/edit-book/${book.id}">
-                            <button type="button" class="btn btn-secondary mt-2 float-right">Edit</button>
-                        </a>
+                        <c:if test="${hasEditAccess == true}">
+                            <a href="${contextPath}/edit-book/${book.id}">
+                                <button type="button" class="btn btn-secondary mt-2 float-right">Edit</button>
+                            </a>
+                        </c:if>
                     </div>
                 </div>
 
             <br><br>
+
                 <!-- Information -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="home">
@@ -118,14 +133,18 @@
 
                         </div>
 
-                        <hr>
+                        <hr class="mb-2">
+
+                        <div class="w-100 mt-0">
+                            <h6 class="m-0 sub-title float-right">${username}</h6>
+                        </div>
 
                     </div>
                 </div>
-                <!--/tab-pane-->
-            </div><!--/tab-content-->
-        </div><!--/col-9-->
-    </div> <!--/row-->
+
+            </div>
+        </div>
+    </div>
 
     <jsp:include page="footer.jsp"/>
 

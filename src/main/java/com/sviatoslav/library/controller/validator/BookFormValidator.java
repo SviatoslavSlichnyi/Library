@@ -53,7 +53,6 @@ public class BookFormValidator implements Validator {
             }
         }
 
-
     }
 
     private boolean checkUploadedHardcoverFileType(MediaType hardcoverType) {

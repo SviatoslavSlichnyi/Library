@@ -61,9 +61,19 @@
 
 <%--                Right Column--%>
                 <div class="col-sm-9">
-                    <div class="col-sm-10">
-                        <h1>Book</h1>
+                    <!-- Title -->
+                    <div class="col-sm w-100">
+                        <div class="w-50 fl-left">
+                            <h1>Book</h1>
+                        </div>
+                        <div class="w-50 fl-left">
+                            <a href="${contextPath}/book/${bookForm.id}">
+                                <button type="button" class="btn btn-danger mt-2 float-right">Cancel</button>
+                            </a>
+                        </div>
                     </div>
+
+                    <br><br>
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="home">
@@ -76,8 +86,7 @@
                                        <form:input path="name"
                                                    type="text"
                                                    class="form-control ${status.error ? 'is-invalid' : ''}"
-                                                   id="name"
-                                                   value="${book.name}"/>
+                                                   id="name"/>
                                        <div class="text-danger text-center">
                                            <form:errors path="name"/>
                                        </div>
@@ -93,8 +102,7 @@
                                             <form:input path="authorFirstName"
                                                         type="text"
                                                         class="form-control ${status.error ? 'is-invalid' : ''}"
-                                                        id="author_first_name"
-                                                        value="${book.author.firstName}"/>
+                                                        id="author_first_name"/>
                                             <div class="text-danger text-center">
                                                 <form:errors path="authorFirstName"/>
                                             </div>
@@ -106,8 +114,7 @@
                                             <form:input path="authorLastName"
                                                         type="text"
                                                         class="form-control ${status.error ? 'is-invalid' : ''}"
-                                                        id="author_last_name"
-                                                        value="${book.author.lastName}"/>
+                                                        id="author_last_name"/>
                                             <div class="text-danger text-center">
                                                 <form:errors path="authorLastName"/>
                                             </div>
@@ -138,8 +145,7 @@
                                         <form:input path="publicationYear"
                                                     type="number"
                                                     class="form-control ${status.error ? 'is-invalid' : ''}"
-                                                    id="publication-year"
-                                                    value="${book.publicationYear}"/>
+                                                    id="publication-year"/>
                                         <div class="text-danger text-center">
                                             <form:errors path="publicationYear"/>
                                         </div>
@@ -154,8 +160,7 @@
                                         <form:input path="numberOfPages"
                                                     type="number"
                                                     class="form-control ${status.error ? 'is-invalid' : ''}"
-                                                    id="pages"
-                                                    value="${book.numberOfPages}"/>
+                                                    id="pages"/>
                                         <div class="text-danger text-center">
                                             <form:errors path="numberOfPages"/>
                                         </div>
@@ -170,8 +175,7 @@
                                         <form:input path="language"
                                                     type="text"
                                                     class="form-control ${status.error ? 'is-invalid' : ''}"
-                                                    id="language"
-                                                    value="${book.language}"/>
+                                                    id="language"/>
                                         <div class="text-danger text-center">
                                             <form:errors path="language"/>
                                         </div>
@@ -186,8 +190,7 @@
                                         <form:input path="description"
                                                     type="text"
                                                     class="form-control ${status.error ? 'is-invalid' : ''}"
-                                                    id="description"
-                                                    value="${book.description}"/>
+                                                    id="description"/>
                                         <div class="text-danger text-center">
                                             <form:errors path="description"/>
                                         </div>

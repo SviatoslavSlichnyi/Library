@@ -44,14 +44,12 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
     @Builder.Default
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
-    @Builder.Default
-    @EqualsAndHashCode.Exclude
-    @OneToMany(targetEntity = Bucket.class, cascade = CascadeType.ALL)
-    @Transient private Set<Bucket> bucket = new HashSet<>();
+    @ManyToMany
+    private final Set<Author> authors = new HashSet<>();
 
     public boolean addRole(Role role) {
         return roles.add(role);

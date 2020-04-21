@@ -32,9 +32,11 @@
                             <a href="#" class="dropdown-item">Manage Accounts</a>
                             <a href="#" class="dropdown-item">Manage Books</a>
                         </c:if>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">My Books</a>
-                        <a href="#" class="dropdown-item">Saved Books</a>
+                        <c:if test="${isUser == true}">
+                            <div class="dropdown-divider"></div>
+                            <a href="${contextPath}/my-books" class="dropdown-item">My Books</a>
+                            <a href="${contextPath}/saved-books" class="dropdown-item">Saved Books</a>
+                        </c:if>
                         <div class="dropdown-divider"></div>
                         <a href="${contextPath}/logout" class="dropdown-item">Logout</a>
                     </div>

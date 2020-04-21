@@ -23,6 +23,11 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
+    public boolean existsByName(String name) {
+        return mediaRepository.existsByName(name);
+    }
+
+    @Override
     public Media save(Media media) {
         return mediaRepository.save(media);
     }

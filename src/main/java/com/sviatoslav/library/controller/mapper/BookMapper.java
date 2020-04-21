@@ -2,22 +2,28 @@ package com.sviatoslav.library.controller.mapper;
 
 import com.sviatoslav.library.entity.Author;
 import com.sviatoslav.library.entity.Book;
-import com.sviatoslav.library.entity.form.BookForm;
 import com.sviatoslav.library.entity.Media;
+import com.sviatoslav.library.entity.User;
+import com.sviatoslav.library.entity.form.BookForm;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+@RequiredArgsConstructor
 
 @Component
 public class BookMapper {
 
-    public Book map(BookForm bookForm) {
-        Author author = Author.builder()
-                .firstName(bookForm.getAuthorFirstName())
-                .lastName(bookForm.getAuthorLastName())
-                .build();
-        author.generateAndSetId();
+    private final AuthorMapper authorMapper;
+    private final MediaMapper mediaMapper;
 
-        Media hardcoverFile = new MediaMapper().map(bookForm.getHardcoverFile());
-        Media bookFile = new MediaMapper().map(bookForm.getBookFile());
+    public Book map(BookForm bookForm, User user) {
+        String authorFirstName = bookForm.getAuthorFirstName();
+        String authorLastName = bookForm.getAuthorLastName();
+
+        Author author = authorMapper.map(authorFirstName, authorLastName);
+
+        Media hardcoverFile = mediaMapper.map(bookForm.getHardcoverFile());
+        Media bookFile = mediaMapper.map(bookForm.getBookFile());
 
         return Book.builder()
                 .id(bookForm.getId())
@@ -30,23 +36,24 @@ public class BookMapper {
                 .description(bookForm.getDescription())
                 .hardcoverFile(hardcoverFile)
                 .bookFile(bookFile)
+                .user(user)
                 .build();
     }
 
     public BookForm map(Book book) {
-        BookForm bookForm = new BookForm();
-        bookForm.setId(book.getId());
-        bookForm.setName(book.getName());
-        bookForm .setAuthorFirstName(book.getAuthor().getFirstName());
-        bookForm.setAuthorLastName(book.getAuthor().getLastName());
-        bookForm.setPublisher(book.getPublisher());
-        bookForm.setPublicationYear(book.getPublicationYear());
-        bookForm.setNumberOfPages(book.getNumberOfPages());
-        bookForm.setLanguage(book.getLanguage());
-        bookForm.setDescription(book.getDescription());
-        bookForm.setHardcoverFile(new MediaMapper().map(book.getHardcoverFile()));
-        bookForm.setBookFile(new MediaMapper().map(book.getBookFile()));
-
-        return bookForm;
+        return BookForm.builder()
+                .id(book.getId())
+                .name(book.getName())
+                .authorFirstName(book.getAuthor().getFirstName())
+                .authorLastName(book.getAuthor().getLastName())
+                .publisher(book.getPublisher())
+                .publicationYear(book.getPublicationYear())
+                .numberOfPages(book.getNumberOfPages())
+                .language(book.getLanguage())
+                .description(book.getDescription())
+                .hardcoverFile(mediaMapper.map(book.getHardcoverFile()))
+                .bookFile(mediaMapper.map(book.getBookFile()))
+                .user(book.getUser())
+                .build();
     }
 }

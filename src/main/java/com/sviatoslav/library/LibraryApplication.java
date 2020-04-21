@@ -3,6 +3,7 @@ package com.sviatoslav.library;
 import com.sviatoslav.library.entity.Role;
 import com.sviatoslav.library.entity.User;
 import com.sviatoslav.library.entity.enumeration.UserRole;
+import com.sviatoslav.library.service.RoleService;
 import com.sviatoslav.library.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,26 +15,36 @@ public class LibraryApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(LibraryApplication.class, args);
 
+        UserService userService = context.getBean(UserService.class);
+        RoleService roleService = context.getBean(RoleService.class);
+
+        Role roleAdmin;
+        Role roleUser;
+        roleAdmin = roleService.find(UserRole.ROLE_ADMIN);
+        roleUser = roleService.find(UserRole.ROLE_USER);
 
         User admin = new User();
         admin.setId(1L);
         admin.setUsername("admin");
         admin.setEmail("admin@mail.com");
         admin.setPassword("adminAccess");
-        admin.addRole(new Role(UserRole.ROLE_ADMIN));
+        admin.addRole(roleAdmin);
+//        admin.addRole(roleUser);
+
 
         User user = User.builder()
+                .id(2L)
                 .email("steve.jobs@gmail.com")
                 .username("apple-lover")
                 .firstName("Steve")
                 .lastName("Jobs")
                 .password("iloveapples")
                 .build();
-        user.addRole(new Role(UserRole.ROLE_USER));
+        user.addRole(roleUser);
 
-        UserService userService = context.getBean(UserService.class);
         userService.save(admin);
         userService.save(user);
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.sviatoslav.library.entity.form;
 
+import com.sviatoslav.library.entity.User;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,6 +9,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BookForm {
 
     private Long id;
@@ -44,4 +48,5 @@ public class BookForm {
     @NotNull
     private MultipartFile bookFile;
 
+    private User user;
 }
