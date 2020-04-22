@@ -29,8 +29,8 @@
                         <a href="${contextPath}/my-account" class="dropdown-item">My Account</a>
                         <c:if test="${isAdmin == true}">
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">Manage Accounts</a>
-                            <a href="#" class="dropdown-item">Manage Books</a>
+                            <a href="${contextPath}/admin/manage-accounts" class="dropdown-item">Manage Accounts</a>
+                            <a href="${contextPath}/admin/manage-books" class="dropdown-item">Manage Books</a>
                         </c:if>
                         <c:if test="${isUser == true}">
                             <div class="dropdown-divider"></div>

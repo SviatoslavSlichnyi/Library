@@ -36,9 +36,11 @@
 
                 <h1 class="w-100">
                     Account
-                    <a href="${pageContext.request.contextPath}/my-account/edit">
-                        <button type="button" class="btn btn-secondary mt-2 fl-right">Edit</button>
-                    </a>
+                    <c:if test="${hasEditAcces == true}">
+                        <a href="${pageContext.request.contextPath}/my-account/edit">
+                            <button type="button" class="btn btn-secondary mt-2 fl-right">Edit</button>
+                        </a>
+                    </c:if>
                 </h1>
 
                 <hr>

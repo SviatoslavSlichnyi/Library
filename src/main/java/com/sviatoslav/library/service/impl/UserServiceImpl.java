@@ -1,6 +1,8 @@
 package com.sviatoslav.library.service.impl;
 
+import com.sviatoslav.library.entity.Role;
 import com.sviatoslav.library.entity.User;
+import com.sviatoslav.library.entity.enumeration.UserRole;
 import com.sviatoslav.library.repository.UserRepository;
 import com.sviatoslav.library.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 
@@ -42,15 +45,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<Long> findIdByEmail(String email) {
-        try {
-            return Optional.of(userRepository.findIdByEmail(email));
-        } catch (RuntimeException e) {
-            return Optional.empty();
-        }
-    }
-
-    @Override
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -65,6 +59,23 @@ public class UserServiceImpl implements UserService {
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(String.format("User with id \"%d\" was NOT found.", id)));
+    }
+
+
+    @Override
+    public Optional<Long> findIdByEmail(String email) {
+        try {
+            return Optional.of(userRepository.findIdByEmail(email));
+        } catch (RuntimeException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public List<User> findUsersByUserRole(UserRole role) {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getRoles().contains(new Role(role)))
+                .collect(Collectors.toList());
     }
 
     @Override
