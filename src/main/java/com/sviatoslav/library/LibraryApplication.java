@@ -42,8 +42,8 @@ public class LibraryApplication {
                 .build();
         user.addRole(roleUser);
 
-        userService.save(admin);
-        userService.save(user);
+        userService.saveAndEncrypt(admin);
+        userService.saveAndEncrypt(user);
 
     }
 

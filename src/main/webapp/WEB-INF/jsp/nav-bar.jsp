@@ -24,9 +24,9 @@
 
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">${uname}</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">${uname}</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item">My Account</a>
+                        <a href="${contextPath}/my-account" class="dropdown-item">My Account</a>
                         <c:if test="${isAdmin == true}">
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item">Manage Accounts</a>

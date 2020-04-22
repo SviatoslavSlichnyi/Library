@@ -96,40 +96,50 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <h6 class="m-0 sub-title">Publisher</h6>
-                                    <h3 class="m-0">${book.publisher}</h3>
+                            <c:if test="${not empty book.publisher}">
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <h6 class="m-0 sub-title">Publisher</h6>
+                                        <h3 class="m-0">${book.publisher}</h3>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
 
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <h6 class="m-0 sub-title">Publication year</h6>
-                                    <h3 class="m-0">${book.publicationYear}</h3>
+                            <c:if test="${not empty book.publicationYear}">
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <h6 class="m-0 sub-title">Publication year</h6>
+                                        <h3 class="m-0">${book.publicationYear}</h3>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
 
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <h6 class="m-0 sub-title">Number of pages</h6>
-                                    <h3 class="m-0">${book.numberOfPages}</h3>
+                            <c:if test="${not empty book.numberOfPages}">
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <h6 class="m-0 sub-title">Number of pages</h6>
+                                        <h3 class="m-0">${book.numberOfPages}</h3>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
 
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <h6 class="m-0 sub-title">Language</h6>
-                                    <h3 class="m-0">${book.language}</h3>
+                            <c:if test="${not empty book.language}">
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <h6 class="m-0 sub-title">Language</h6>
+                                        <h3 class="m-0">${book.language}</h3>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
 
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <h6 class="m-0 sub-title">Description</h6>
-                                    <h3 class="m-0">${book.description}</h3>
+                            <c:if test="${not empty book.description}">
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <h6 class="m-0 sub-title">Description</h6>
+                                        <h3 class="m-0">${book.description}</h3>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
 
                         </div>
 

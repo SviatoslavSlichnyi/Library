@@ -1,11 +1,12 @@
 package com.sviatoslav.library.entity.form;
 
-import com.sviatoslav.library.entity.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -16,30 +17,28 @@ public class BookForm {
 
     private Long id;
 
-    @NotEmpty
+    @NotNull
     private String name;
 
-    @NotEmpty
+    @NotNull
     private String authorFirstName;
 
-    @NotEmpty
+    @NotNull
     private String authorLastName;
 
-    @NotEmpty
+    @NotNull
     private String publisher;
 
-    @NotNull
     @Min(0L)
     private Integer publicationYear;
 
-    @NotNull
     @Min(0L)
     private Integer numberOfPages;
 
-    @NotEmpty
+    @NotNull
     private String language;
 
-    @NotEmpty
+    @NotNull
     private String description;
 
     @NotNull
@@ -47,6 +46,4 @@ public class BookForm {
 
     @NotNull
     private MultipartFile bookFile;
-
-    private User user;
 }

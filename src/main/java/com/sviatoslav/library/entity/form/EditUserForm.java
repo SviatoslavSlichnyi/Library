@@ -1,8 +1,11 @@
 package com.sviatoslav.library.entity.form;
 
-import lombok.*;
+import com.sviatoslav.library.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -10,16 +13,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserForm {
-
-    private Long id;
+public class EditUserForm {
 
     @NotEmpty
     private String username;
-
-    @NotEmpty
-    @Email
-    private String email;
 
     @NotNull
     private String firstName;
@@ -27,10 +24,5 @@ public class UserForm {
     @NotNull
     private String lastName;
 
-    @NotNull
-    private String password;
-
-    @NotNull
-    private String passwordConfirm;
-
+    private User currentUser;
 }

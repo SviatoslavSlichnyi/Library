@@ -1,7 +1,6 @@
 package com.sviatoslav.library.service.impl;
 
 import com.sviatoslav.library.entity.User;
-import com.sviatoslav.library.entity.enumeration.UserRole;
 import com.sviatoslav.library.repository.UserRepository;
 import com.sviatoslav.library.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +52,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User saveAndEncrypt(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
@@ -66,6 +69,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateAndEncrypt(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

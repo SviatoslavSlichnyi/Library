@@ -33,7 +33,7 @@
 
                             <spring:bind path="username">
                                 <div class="form-group">
-                                    <label>Username</label>
+                                    <label>*Username</label>
                                     <small class="form-text text-muted">This name will be used for public posts.</small>
                                     <form:input path="username"
                                                 type="text"
@@ -74,7 +74,7 @@
 
                             <spring:bind path="email">
                                 <div class="form-group">
-                                    <label>Email address</label>
+                                    <label>*Email address</label>
                                     <div id="error-email" class="invalid-text"></div>
                                     <form:input path="email"
                                                 type="email"
@@ -87,7 +87,7 @@
 
                             <spring:bind path="password">
                                 <div class="form-group">
-                                    <label>Create password</label>
+                                    <label>*Create password</label>
                                     <div id="error-pwd" class="invalid-text"></div>
                                     <form:input path="password"
                                                 type="password"
@@ -100,7 +100,7 @@
 
                             <spring:bind path="passwordConfirm">
                                 <div class="form-group">
-                                    <label>Confirm password</label>
+                                    <label>*Confirm password</label>
                                     <div id="error-conf-pwd" class="invalid-text"></div>
                                     <form:input path="passwordConfirm"
                                                 type="password"
@@ -110,6 +110,8 @@
                                     </div>
                                 </div>
                             </spring:bind>
+
+                            <small class="form-text text-muted mb-2">* - required fields</small>
 
                             <div class="form-group">
                                 <button type="submit"

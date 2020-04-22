@@ -16,10 +16,10 @@ import org.springframework.validation.Validator;
 @PropertySource("classpath:validator.properties")
 public class UserFormValidator implements Validator {
 
+    private final UserService userService;
+
     @Value("${validator.userform.password.length.min}")
     private int minPasswordLength;
-
-    private final UserService userService;
 
     @Override
     public boolean supports(Class<?> clazz) {

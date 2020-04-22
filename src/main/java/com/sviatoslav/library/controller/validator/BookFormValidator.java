@@ -4,7 +4,9 @@ import com.sviatoslav.library.entity.form.BookForm;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -18,15 +20,28 @@ public class BookFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name",
+                "book.name.not.empty",
+                "field has to be filled");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "authorFirstName",
+                "book-form.author-first-name.not.empty",
+                "field has to be filled");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "authorLastName",
+                "book-form.author-last-name.not.empty",
+                "field has to be filled");
+
 
         BookForm bookForm = (BookForm) target;
 
-        String hardcoverContentType = bookForm.getHardcoverFile().getContentType();
+        MultipartFile hardcoverFile = bookForm.getHardcoverFile();
+        MultipartFile bookFile = bookForm.getBookFile();
+
+        String hardcoverContentType = hardcoverFile.getContentType();
         Optional<String> hardcoverFileTypeOpt = Optional.ofNullable(hardcoverContentType);
-        if (!hardcoverFileTypeOpt.isPresent()) {
+        if (hardcoverFile.isEmpty() || !hardcoverFileTypeOpt.isPresent()) {
             errors.rejectValue("hardcoverFile",
                     "book-form.upload-file.empty",
-                    "must not be empty");
+                    "can't be empty");
         } else {
             MediaType hardcoverFileMediaType = MediaType.valueOf(hardcoverContentType);
 
@@ -37,12 +52,12 @@ public class BookFormValidator implements Validator {
             }
         }
 
-        String bookContentType = bookForm.getBookFile().getContentType();
+        String bookContentType = bookFile.getContentType();
         Optional<String> bookType = Optional.ofNullable(bookContentType);
-        if (!bookType.isPresent()) {
+        if (bookFile.isEmpty() || !bookType.isPresent()) {
             errors.rejectValue("bookFile",
                     "book-form.upload-file.empty",
-                    "must not be empty");
+                    "can't be empty");
         } else {
             MediaType bookFileMediaType = MediaType.valueOf(bookContentType);
 

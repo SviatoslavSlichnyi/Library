@@ -6,8 +6,6 @@ import com.sviatoslav.library.entity.Book;
 import com.sviatoslav.library.entity.MediaMultipartFile;
 import com.sviatoslav.library.entity.form.BookForm;
 import com.sviatoslav.library.service.BookService;
-import com.sviatoslav.library.service.MediaService;
-import com.sviatoslav.library.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -24,12 +22,10 @@ import javax.validation.Valid;
 
 @Controller
 @Slf4j
-public class EditBookController {
+public class BookEditController {
 
     private final BookFormValidator bookFormValidator;
-    private final UserService userService;
     private final BookService bookService;
-    private final MediaService mediaService;
     private final BookMapper bookMapper;
 
     @GetMapping("/edit-book/{id}")
@@ -43,8 +39,8 @@ public class EditBookController {
 
     @PostMapping("/edit-book/{id}")
     public String updateBook(@Valid @ModelAttribute BookForm bookForm,
-                             @PathVariable Long id,
-                             BindingResult bindingResult) {
+                             BindingResult bindingResult,
+                             @PathVariable Long id) {
         log.debug("POST: edit book: " + bookForm);
 
         Book book = bookService.findById(id);
@@ -58,8 +54,7 @@ public class EditBookController {
             MediaMultipartFile bookMediaMultipartFile = new MediaMultipartFile(book.getBookFile());
             bookForm.setBookFile(bookMediaMultipartFile);
         }
-
-
+        log.debug("previous media was added.");
         bookFormValidator.validate(bookForm, bindingResult);
         if (bindingResult.hasErrors()) {
             log.debug("BookForm is NOT valid.");

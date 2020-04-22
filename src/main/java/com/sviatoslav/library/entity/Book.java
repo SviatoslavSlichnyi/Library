@@ -39,10 +39,8 @@ public class Book {
     @NonNull
     private String publisher;
 
-    @NonNull
     private Integer publicationYear;
 
-    @NonNull
     private Integer numberOfPages;
 
     @NonNull
@@ -51,6 +49,8 @@ public class Book {
     @NonNull
     private String description;
 
+    @NonNull
+    @NotNull
     @OneToOne
     private Media hardcoverFile;
 }

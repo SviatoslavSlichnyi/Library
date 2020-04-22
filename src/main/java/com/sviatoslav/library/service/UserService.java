@@ -6,6 +6,10 @@ import java.util.Optional;
 
 public interface UserService extends CrudService<User, Long> {
 
+    User saveAndEncrypt(User user);
+
+    User updateAndEncrypt(User user);
+
     User findByEmail(String email);
 
     User findByUsername(String username);

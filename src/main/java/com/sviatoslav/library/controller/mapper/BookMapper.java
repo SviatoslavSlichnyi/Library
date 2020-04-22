@@ -53,7 +53,6 @@ public class BookMapper {
                 .description(book.getDescription())
                 .hardcoverFile(mediaMapper.map(book.getHardcoverFile()))
                 .bookFile(mediaMapper.map(book.getBookFile()))
-                .user(book.getUser())
                 .build();
     }
 }

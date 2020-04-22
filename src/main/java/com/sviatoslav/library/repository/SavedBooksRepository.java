@@ -20,4 +20,6 @@ public interface SavedBooksRepository extends JpaRepository<SavedBooks, Long> {
 
     @Query("SELECT sb.book FROM SavedBooks sb WHERE sb.user.username=:username")
     List<Book> findBooksByUsername(@Param("username") String username);
+
+    void deleteSavedBooksByBook_Id(Long bookId);
 }

@@ -8,6 +8,7 @@ import com.sviatoslav.library.entity.form.BookForm;
 import com.sviatoslav.library.service.BookService;
 import com.sviatoslav.library.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +22,8 @@ import java.security.Principal;
 @RequiredArgsConstructor
 
 @Controller
-public class AddBookController {
+@Slf4j
+public class BookAddController {
 
     private final UserService userService;
     private final BookService bookService;
@@ -29,8 +31,14 @@ public class AddBookController {
     private final BookMapper bookMapper;
 
     @GetMapping("/add-book")
-    public String getAddBookPage(Model model) {
+    public String getAddBookPage(Principal principal, Model model) {
+        String username = principal.getName();
+        User user = userService.findByUsername(username);
+
         model.addAttribute("bookForm", new BookForm());
+        model.addAttribute("authorFirstNamePrediction", user.getFirstName());
+        model.addAttribute("authorLastNamePrediction", user.getLastName());
+
         return "add-book";
     }
 
@@ -40,6 +48,7 @@ public class AddBookController {
                           Principal principal) {
         bookFormValidator.validate(bookForm, bindingResult);
         if (bindingResult.hasErrors()) {
+            log.debug("BookForm is NOT valid.");
             return "add-book";
         }
 

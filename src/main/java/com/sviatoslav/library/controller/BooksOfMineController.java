@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 
 @Controller
-public class MyBooksController {
+public class BooksOfMineController {
 
     private final BookService bookService;
 
@@ -30,7 +30,7 @@ public class MyBooksController {
 
     @PostMapping("/my-books/delete/{id}")
     public String removeBookFromMyList(@PathVariable Long id) {
-        bookService.deleteById(id);
+        bookService.deleteFromBooksAndSavedBooks(id);
         return "redirect:/my-books";
     }
 

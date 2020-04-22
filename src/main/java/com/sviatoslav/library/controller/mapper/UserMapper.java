@@ -1,6 +1,7 @@
 package com.sviatoslav.library.controller.mapper;
 
 import com.sviatoslav.library.entity.User;
+import com.sviatoslav.library.entity.form.EditUserForm;
 import com.sviatoslav.library.entity.form.UserForm;
 import org.springframework.stereotype.Component;
 
@@ -18,4 +19,22 @@ public class UserMapper {
                 .build();
     }
 
+    public User map(User user, UserForm userForm) {
+        user.setUsername(userForm.getUsername());
+        user.setEmail(userForm.getEmail());
+        user.setFirstName(userForm.getFirstName());
+        user.setLastName(userForm.getLastName());
+
+        return user;
+    }
+
+    public UserForm map(User user) {
+        return UserForm.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .build();
+    }
 }

@@ -1,15 +1,13 @@
 package com.sviatoslav.library.service.impl;
 
 import com.sviatoslav.library.entity.Book;
-import com.sviatoslav.library.repository.AuthorRepository;
-import com.sviatoslav.library.repository.BookRepository;
-import com.sviatoslav.library.repository.MediaRepository;
-import com.sviatoslav.library.repository.UserRepository;
+import com.sviatoslav.library.repository.*;
 import com.sviatoslav.library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,6 +19,7 @@ public class BookServiceImpl implements BookService {
     private final AuthorRepository authorRepository;
     private final MediaRepository mediaRepository;
     private final UserRepository userRepository;
+    private final SavedBooksRepository savedBooksRepository;
 
     @Override
     public Book save(Book book) {
@@ -46,6 +45,13 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteAll() {
         bookRepository.deleteAll();
+    }
+
+    @Transactional
+    @Override
+    public void deleteFromBooksAndSavedBooks(Long bookId) {
+        savedBooksRepository.deleteSavedBooksByBook_Id(bookId);
+        bookRepository.deleteById(bookId);
     }
 
     @Override

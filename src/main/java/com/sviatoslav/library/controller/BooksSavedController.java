@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 
 @Controller
-public class SavedBooksController {
+public class BooksSavedController {
 
     private final SavedBooksService savedBooksService;
     private final BookService bookService;

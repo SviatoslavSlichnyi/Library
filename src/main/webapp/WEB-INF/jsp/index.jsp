@@ -18,20 +18,22 @@
 
     
     <!-- Welcome message -->
-    <div id="cov-cont" class="cover-container d-flex h-100 p-3 mx-auto flex-column marg-b-5">
-    
-        <main role="main" class="inner cover">
-          <h1 class="cover-heading">Welcome to Library</h1>
-          <p class="lead">Read. Write. Share.</p>
-          <p class="lead">
-              <c:if test="${empty username}">
-                  <a href="${contextPath}/registration"
-                     class="btn btn-lg btn-secondary">Sign Up now</a>
-              </c:if>
-          </p>
-        </main>
-  
-      </div>
+    <div class="container">
+        <div id="cov-cont" class="cover-container d-flex h-100 p-3 mx-auto flex-column marg-b-5">
+
+            <main role="main" class="inner cover">
+                <h1 class="cover-heading">Welcome to Library</h1>
+                <p class="lead">Read. Write. Share.</p>
+                <p class="lead">
+                    <c:if test="${empty username}">
+                        <a href="${contextPath}/registration"
+                           class="btn btn-lg btn-secondary">Sign Up now</a>
+                    </c:if>
+                </p>
+            </main>
+
+        </div>
+    </div>
 
     
     <!-- Footer -->
