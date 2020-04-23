@@ -48,13 +48,6 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany
-    private final Set<Author> authors = new HashSet<>();
-
-    public boolean addRole(Role role) {
-        return roles.add(role);
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

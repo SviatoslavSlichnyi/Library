@@ -1,9 +1,8 @@
 package com.sviatoslav.library.controller;
 
 import com.sviatoslav.library.controller.mapper.BookMapper;
-import com.sviatoslav.library.controller.validator.BookFormValidator;
+import com.sviatoslav.library.controller.validator.BookValidator;
 import com.sviatoslav.library.entity.Book;
-import com.sviatoslav.library.entity.MediaMultipartFile;
 import com.sviatoslav.library.entity.form.BookForm;
 import com.sviatoslav.library.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ import javax.validation.Valid;
 @Slf4j
 public class BookEditController {
 
-    private final BookFormValidator bookFormValidator;
+    private final BookValidator bookValidator;
     private final BookService bookService;
     private final BookMapper bookMapper;
 
@@ -41,28 +40,17 @@ public class BookEditController {
     public String updateBook(@Valid @ModelAttribute BookForm bookForm,
                              BindingResult bindingResult,
                              @PathVariable Long id) {
-        log.debug("POST: edit book: " + bookForm);
 
         Book book = bookService.findById(id);
-        if (bookForm.getHardcoverFile().isEmpty()) {
-            log.debug("book.hardcover is empty");
-            MediaMultipartFile hardcoverMediaMultipartFile = new MediaMultipartFile(book.getHardcoverFile());
-            bookForm.setHardcoverFile(hardcoverMediaMultipartFile);
-        }
-        if (bookForm.getBookFile().isEmpty()) {
-            log.debug("book.bookFile is empty");
-            MediaMultipartFile bookMediaMultipartFile = new MediaMultipartFile(book.getBookFile());
-            bookForm.setBookFile(bookMediaMultipartFile);
-        }
-        log.debug("previous media was added.");
-        bookFormValidator.validate(bookForm, bindingResult);
+        bookMapper.map(book, bookForm);
+
+        bookValidator.validate(book, bindingResult);
         if (bindingResult.hasErrors()) {
             log.debug("BookForm is NOT valid.");
             return "edit-book";
         }
 
-        Book editedBook = bookMapper.map(bookForm, book.getUser());
-        bookService.updateWithFields(editedBook);
+        bookService.updateWithFields(book);
 
         return "redirect:/book/" + id;
     }

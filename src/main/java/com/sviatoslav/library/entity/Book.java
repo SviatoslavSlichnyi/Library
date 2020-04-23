@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
-@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -18,7 +17,6 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
     @NotNull
     private String name;
 
@@ -26,31 +24,25 @@ public class Book {
     @ManyToOne
     private Author author;
 
-    @NonNull
-    @NotNull
-    @OneToOne
-    private Media bookFile;
-
-    @NonNull
-    @NotNull
-    @ManyToOne
-    private User user;
-
-    @NonNull
     private String publisher;
 
     private Integer publicationYear;
 
     private Integer numberOfPages;
 
-    @NonNull
     private String language;
 
-    @NonNull
     private String description;
 
-    @NonNull
     @NotNull
     @OneToOne
     private Media hardcoverFile;
+
+    @NotNull
+    @OneToOne
+    private Media bookFile;
+
+    @NotNull
+    @ManyToOne
+    private User user;
 }

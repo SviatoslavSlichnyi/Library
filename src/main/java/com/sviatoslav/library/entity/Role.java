@@ -5,8 +5,6 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +12,6 @@ import java.util.Set;
 @Builder
 
 @Entity
-@Table(name = "role")
 public class Role implements GrantedAuthority {
 
     @Id
@@ -25,9 +22,6 @@ public class Role implements GrantedAuthority {
     @NonNull
     @Column(nullable = false)
     private String name;
-
-//    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-//    private final Set<User> users = new HashSet<>();
 
     public Role(UserRole role) {
         this.id = role.getId();

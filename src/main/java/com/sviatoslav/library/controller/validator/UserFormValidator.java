@@ -28,23 +28,37 @@ public class UserFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "user.name.not.empty");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "user.password.not.empty");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConfirm", "user.password.not.empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "validator.user-form.username.not.empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "validator.user-form.email.not.empty");
 
         UserForm userForm = (UserForm) target;
 
         if (userService.existsByUsername(userForm.getUsername())) {
             errors.rejectValue("username",
-                    "user.username.already-exists",
-                    "User with username \""+userForm.getUsername()+"\" already exist.");
+                    "validator.user-form.username.already.exists");
         }
 
-        if (userForm.getPassword().length() < minPasswordLength) {
-            errors.rejectValue("password", "userForm.size.password");
+        if (userService.existsByEmail(userForm.getEmail())) {
+            errors.rejectValue("email",
+                    "validator.user-form.email.already.exists");
         }
-        else if (!userForm.getPassword().equals(userForm.getPasswordConfirm())) {
-            errors.rejectValue("passwordConfirm", "userForm.diff.passwordConfirm");
+
+        String password = userForm.getPassword();
+        String passwordConfirm = userForm.getPasswordConfirm();
+
+        if (password.isEmpty()) {
+            errors.rejectValue("password",
+                    "validator.user-from.password.not.empty");
+        }
+
+        if (passwordConfirm.isEmpty()) {
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConfirm", "validator.user-from.password.not.empty");
+        }
+        else if (password.length() < minPasswordLength) {
+            errors.rejectValue("password", "validator.user-form.size.password");
+        }
+        else if (!password.equals(passwordConfirm)) {
+            errors.rejectValue("passwordConfirm", "validator.user-form.diff.password-confirm");
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.sviatoslav.library.controller;
 
 import com.sviatoslav.library.controller.mapper.BookMapper;
-import com.sviatoslav.library.controller.validator.BookFormValidator;
+import com.sviatoslav.library.controller.validator.BookValidator;
 import com.sviatoslav.library.entity.Book;
 import com.sviatoslav.library.entity.User;
 import com.sviatoslav.library.entity.form.BookForm;
@@ -27,7 +27,7 @@ public class BookAddController {
 
     private final UserService userService;
     private final BookService bookService;
-    private final BookFormValidator bookFormValidator;
+    private final BookValidator bookValidator;
     private final BookMapper bookMapper;
 
     @GetMapping("/add-book")
@@ -46,16 +46,17 @@ public class BookAddController {
     public String addBook(@Valid @ModelAttribute BookForm bookForm,
                           BindingResult bindingResult,
                           Principal principal) {
-        bookFormValidator.validate(bookForm, bindingResult);
+
+        String username = principal.getName();
+        User user = userService.findByUsername(username);
+        Book book = bookMapper.map(bookForm, user);
+
+        bookValidator.validate(book, bindingResult);
         if (bindingResult.hasErrors()) {
             log.debug("BookForm is NOT valid.");
             return "add-book";
         }
 
-        String username = principal.getName();
-        User user = userService.findByUsername(username);
-
-        Book book = bookMapper.map(bookForm, user);
         bookService.saveBookAndFields(book);
 
         return "redirect:/my-books";

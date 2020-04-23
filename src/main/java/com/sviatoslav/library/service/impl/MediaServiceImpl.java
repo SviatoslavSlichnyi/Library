@@ -19,7 +19,7 @@ public class MediaServiceImpl implements MediaService {
     @Override
     public Media findByName(String name) {
         return mediaRepository.findByName(name).orElseThrow(
-                () -> new EntityNotFoundException("Media with file name \""+name+"\" was NOT found."));
+                () -> new EntityNotFoundException(String.format("Media with file name \"%s\" was NOT found.", name)));
     }
 
     @Override
@@ -35,7 +35,7 @@ public class MediaServiceImpl implements MediaService {
     @Override
     public Media findById(Long id) {
         return mediaRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Media with id \""+id+"\" was NOT found."));
+                () -> new EntityNotFoundException(String.format("Media with id \"%d\" was NOT found.", id)));
     }
 
     @Override

@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<sec:authentication var="currentUsername" property="principal.username"/>
 
 <!DOCTYPE html>
 <html>
@@ -36,7 +40,7 @@
 
                 <h1 class="w-100">
                     Account
-                    <c:if test="${hasEditAcces == true}">
+                    <c:if test="${currentUsername eq user.username}">
                         <a href="${pageContext.request.contextPath}/my-account/edit">
                             <button type="button" class="btn btn-secondary mt-2 fl-right">Edit</button>
                         </a>

@@ -30,4 +30,12 @@ public class Media {
 
     @Lob
     private byte[] data;
+
+    public boolean isEmpty() {
+        if (data == null) {
+            return true;
+        } else {
+            return 0 == data.length;
+        }
+    }
 }

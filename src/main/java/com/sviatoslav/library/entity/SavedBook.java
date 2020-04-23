@@ -11,17 +11,17 @@ import javax.persistence.*;
 @Builder
 
 @Entity
-public class SavedBooks {
+public class SavedBook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Book book;
 
     @NonNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 }

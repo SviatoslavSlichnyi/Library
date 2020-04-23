@@ -21,8 +21,6 @@ import java.security.Principal;
 @Controller
 public class MyAccountController {
 
-    private static final boolean EDIT_ACCESS = true;
-
     private final UserService userService;
     private final EditUserMapper editUserMapper;
     private final EditUserValidator editUserValidator;
@@ -33,7 +31,6 @@ public class MyAccountController {
         User user = userService.findByUsername(username);
 
         model.addAttribute("user", user);
-        model.addAttribute("hasEditAccess", EDIT_ACCESS);
         return "account";
     }
 
@@ -55,6 +52,7 @@ public class MyAccountController {
                               Principal principal,
                               Model model,
                               BindingResult bindingResult) {
+
         String username = principal.getName();
         User user = userService.findByUsername(username);
         editUserForm.setCurrentUser(user);

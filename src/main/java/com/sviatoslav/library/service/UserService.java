@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface UserService extends CrudService<User, Long> {
 
-    User saveAndEncrypt(User user);
+    User encryptAndSave(User user);
 
-    User updateAndEncrypt(User user);
+    User encryptAndUpdate(User user);
 
     User findByEmail(String email);
 

@@ -17,24 +17,25 @@ public class MediaMapper {
     private final MediaService mediaService;
 
     public Media map(MultipartFile multipartFile) {
-        Media media;
-
         String name = multipartFile.getName();
         if (mediaService.existsByName(name)) {
-            media = mediaService.findByName(name);
+            return mediaService.findByName(name);
         } else {
-            media = Media.builder()
-                    .name(generateFilename())
-                    .originalFilename(multipartFile.getOriginalFilename())
-                    .contentType(multipartFile.getContentType())
-                    .build();
-            try {
-                media.setData(multipartFile.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return buildMedia(multipartFile);
         }
+    }
 
+    private Media buildMedia(MultipartFile multipartFile) {
+        Media media = Media.builder()
+                .name(generateFilename())
+                .originalFilename(multipartFile.getOriginalFilename())
+                .contentType(multipartFile.getContentType())
+                .build();
+        try {
+            media.setData(multipartFile.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return media;
     }
 
@@ -51,5 +52,4 @@ public class MediaMapper {
     private String generateFilename() {
         return String.valueOf(System.nanoTime());
     }
-
 }

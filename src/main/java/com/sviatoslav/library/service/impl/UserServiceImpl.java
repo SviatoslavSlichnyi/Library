@@ -1,6 +1,5 @@
 package com.sviatoslav.library.service.impl;
 
-import com.sviatoslav.library.entity.Role;
 import com.sviatoslav.library.entity.User;
 import com.sviatoslav.library.entity.enumeration.UserRole;
 import com.sviatoslav.library.repository.UserRepository;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 
@@ -50,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveAndEncrypt(User user) {
+    public User encryptAndSave(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
@@ -73,9 +71,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findUsersByUserRole(UserRole role) {
-        return userRepository.findAll().stream()
-                .filter(user -> user.getRoles().contains(new Role(role)))
-                .collect(Collectors.toList());
+        return userRepository.findUsersByRole(role.getName());
     }
 
     @Override
@@ -84,7 +80,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateAndEncrypt(User user) {
+    public User encryptAndUpdate(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }

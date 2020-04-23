@@ -41,11 +41,10 @@ public class RegistrationController {
         }
 
         User user = userMapper.map(userForm);
-        user.addRole(new Role(UserRole.ROLE_USER));
+        user.getRoles().add(new Role(UserRole.ROLE_USER));
 
-        userService.saveAndEncrypt(user);
+        userService.encryptAndSave(user);
 
         return "redirect:/login";
     }
-
 }

@@ -1,5 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -16,7 +18,6 @@
     <!-- Navigation bar -->
     <c:import url="/nav-bar"/>
 
-    
     <!-- Welcome message -->
     <div class="container">
         <div id="cov-cont" class="cover-container d-flex h-100 p-3 mx-auto flex-column marg-b-5">
@@ -25,17 +26,15 @@
                 <h1 class="cover-heading">Welcome to Library</h1>
                 <p class="lead">Read. Write. Share.</p>
                 <p class="lead">
-                    <c:if test="${empty username}">
-                        <a href="${contextPath}/registration"
-                           class="btn btn-lg btn-secondary">Sign Up now</a>
-                    </c:if>
+                    <sec:authorize access="!isAuthenticated()">
+                        <a href="${contextPath}/registration" class="btn btn-lg btn-secondary">Sign Up now</a>
+                    </sec:authorize>
                 </p>
             </main>
 
         </div>
     </div>
 
-    
     <!-- Footer -->
     <jsp:include page="footer.jsp"/>
 

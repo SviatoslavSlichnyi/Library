@@ -12,5 +12,5 @@ public interface BookService extends CrudService<Book, Long> {
 
     Book updateWithFields(Book book);
 
-    void deleteFromBooksAndSavedBooks(Long bookId);
+    void deleteFromBooksAndSavedBooks(Long id);
 }

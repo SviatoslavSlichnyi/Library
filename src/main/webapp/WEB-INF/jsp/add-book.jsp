@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     <div class="meta">
-                        <a>Use only .pdf, .epub or .txt types of file.</a>
+                        <a>Use only .pdf or .txt types of file.</a>
                     </div>
                     <div class="text-danger text-center">
                         <form:errors path="bookFile"/>

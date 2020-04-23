@@ -14,7 +14,6 @@ public class EditUserValidator implements Validator {
 
     private final UserService userService;
 
-
     @Override
     public boolean supports(Class<?> clazz) {
         return EditUserForm.class.equals(clazz);

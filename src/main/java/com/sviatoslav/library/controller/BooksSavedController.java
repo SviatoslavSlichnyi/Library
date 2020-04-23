@@ -1,10 +1,10 @@
 package com.sviatoslav.library.controller;
 
 import com.sviatoslav.library.entity.Book;
-import com.sviatoslav.library.entity.SavedBooks;
+import com.sviatoslav.library.entity.SavedBook;
 import com.sviatoslav.library.entity.User;
 import com.sviatoslav.library.service.BookService;
-import com.sviatoslav.library.service.SavedBooksService;
+import com.sviatoslav.library.service.SavedBookService;
 import com.sviatoslav.library.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,14 +21,14 @@ import java.util.List;
 @Controller
 public class BooksSavedController {
 
-    private final SavedBooksService savedBooksService;
+    private final SavedBookService savedBookService;
     private final BookService bookService;
     private final UserService userService;
 
     @GetMapping("/saved-books")
     public String getSavedBooksPage(Principal principal, Model model) {
         String username = principal.getName();
-        List<Book> books = savedBooksService.findBooksByUsername(username);
+        List<Book> books = savedBookService.findBooksByUsername(username);
 
         model.addAttribute("books", books);
         return "saved-books";
@@ -41,11 +41,11 @@ public class BooksSavedController {
         String username = principal.getName();
         User user = userService.findByUsername(username);
 
-        SavedBooks savedBooks = SavedBooks.builder()
+        SavedBook savedBook = SavedBook.builder()
                 .book(book)
                 .user(user)
                 .build();
-        savedBooksService.save(savedBooks);
+        savedBookService.save(savedBook);
 
         return "redirect:/book/" + id;
     }
@@ -53,9 +53,8 @@ public class BooksSavedController {
     @PostMapping("/saved-books/remove/{id}")
     public String removeBookFromSaved(@PathVariable Long id, Principal principal) {
         String username = principal.getName();
-        SavedBooks savedBook = savedBooksService.findByBookIdAndUserUsername(id, username);
 
-        savedBooksService.delete(savedBook);
+        savedBookService.deleteByBookIdAndUserUsername(id, username);
 
         return "redirect:/saved-books";
     }

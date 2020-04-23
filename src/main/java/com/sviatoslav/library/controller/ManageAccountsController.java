@@ -40,5 +40,4 @@ public class ManageAccountsController {
         userService.deleteById(id);
         return "redirect:/admin/manage-accounts";
     }
-
 }

@@ -18,13 +18,9 @@ import java.io.InputStream;
 public class MediaMultipartFile implements MultipartFile {
 
     private Long id;
-
     private String name;
-
     private String originalFilename;
-
     private String contentType;
-
     private byte[] data;
 
     public MediaMultipartFile(Media media) {
@@ -61,6 +57,6 @@ public class MediaMultipartFile implements MultipartFile {
 
     @Override
     public void transferTo(File dest) throws IllegalStateException {
-
+        throw new RuntimeException("This method is NOT written.");
     }
 }

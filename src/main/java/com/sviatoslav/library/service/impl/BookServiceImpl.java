@@ -2,7 +2,7 @@ package com.sviatoslav.library.service.impl;
 
 import com.sviatoslav.library.entity.Book;
 import com.sviatoslav.library.repository.*;
-import com.sviatoslav.library.service.BookService;
+import com.sviatoslav.library.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +16,10 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
-    private final MediaRepository mediaRepository;
-    private final UserRepository userRepository;
-    private final SavedBooksRepository savedBooksRepository;
+    private final AuthorService authorService;
+    private final MediaService mediaService;
+    private final UserService userService;
+    private final SavedBookService savedBookService;
 
     @Override
     public Book save(Book book) {
@@ -49,9 +49,9 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public void deleteFromBooksAndSavedBooks(Long bookId) {
-        savedBooksRepository.deleteSavedBooksByBook_Id(bookId);
-        bookRepository.deleteById(bookId);
+    public void deleteFromBooksAndSavedBooks(Long id) {
+        savedBookService.deleteSavedBooksByBookId(id);
+        bookRepository.deleteById(id);
     }
 
     @Override
@@ -61,15 +61,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> findByUsername(String username) {
-        return bookRepository.findByUsername(username);
+        return bookRepository.findBooksByUser_Username(username);
     }
 
     @Override
     public Book saveBookAndFields(Book book) {
-        authorRepository.save(book.getAuthor());
-        userRepository.save(book.getUser());
-        mediaRepository.save(book.getHardcoverFile());
-        mediaRepository.save(book.getBookFile());
+        userService.save(book.getUser());
+        authorService.save(book.getAuthor());
+        mediaService.save(book.getHardcoverFile());
+        mediaService.save(book.getBookFile());
 
         return bookRepository.save(book);
     }
