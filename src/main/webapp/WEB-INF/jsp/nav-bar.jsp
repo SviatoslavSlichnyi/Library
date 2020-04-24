@@ -32,6 +32,7 @@
                    aria-expanded="false"><spring:message code="nav-bar.language"/></a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="?language=en">en</a>
+                    <a class="dropdown-item" href="?language=ua">ua</a>
                 </div>
             </li>
 
