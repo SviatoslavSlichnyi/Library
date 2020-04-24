@@ -5,6 +5,8 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <sec:authorize var="isAuthenticated" access="isAuthenticated()"/>
+<c:set var="currentUri" value="${requestScope['javax.servlet.forward.request_uri']}"/>
+<c:set var="isLoginPage" value="${currentUri == (contextPath += '/login')}"/>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="${pageContext.request.contextPath}">
@@ -27,14 +29,16 @@
 
         <ul class="nav navbar-nav ml-auto">
 
-            <li class="nav-item dropdown mr-4">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false"><spring:message code="nav-bar.language"/></a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="?language=en">en</a>
-                    <a class="dropdown-item" href="?language=ua">ua</a>
-                </div>
-            </li>
+            <c:if test="${!isLoginPage}">
+                <li class="nav-item dropdown mr-4">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false"><spring:message code="nav-bar.language"/></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="?language=en">en</a>
+                        <a class="dropdown-item" href="?language=ua">ua</a>
+                    </div>
+                </li>
+            </c:if>
 
             <c:if test="${isAuthenticated}">
                 <li class="nav-item dropdown">
