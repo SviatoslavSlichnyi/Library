@@ -1,6 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <sec:authorize var="isAuthenticated" access="isAuthenticated()"/>
@@ -17,45 +18,71 @@
         <c:if test="${isAuthenticated}">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${contextPath}/books">Books</a>
+                    <a class="nav-link" href="${contextPath}/books">
+                        <spring:message code="nav-bar.tab.books"/>
+                    </a>
                 </li>
             </ul>
+        </c:if>
 
-            <ul class="nav navbar-nav ml-auto">
+        <ul class="nav navbar-nav ml-auto">
 
+            <li class="nav-item dropdown mr-4">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false"><spring:message code="nav-bar.language"/></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="?language=en">en</a>
+                </div>
+            </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <sec:authentication property="principal.username"/>
+            <c:if test="${isAuthenticated}">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        <sec:authentication property="principal.username"/>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+
+                        <a href="${contextPath}/my-account" class="dropdown-item">
+                            <spring:message code="my-account.title"/>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-
-                        <a href="${contextPath}/my-account" class="dropdown-item">My Account</a>
 
                         <sec:authorize access="hasRole('ADMIN')">
                             <div class="dropdown-divider"></div>
-                            <a href="${contextPath}/admin/manage-accounts" class="dropdown-item">Manage Accounts</a>
-                            <a href="${contextPath}/admin/manage-books" class="dropdown-item">Manage Books</a>
+                            <a href="${contextPath}/admin/manage-accounts" class="dropdown-item">
+                                <spring:message code="manage-accounts.title"/>
+                            </a>
+                            <a href="${contextPath}/admin/manage-books" class="dropdown-item">
+                                <spring:message code="manage-books.title"/>
+                            </a>
                         </sec:authorize>
 
                         <sec:authorize access="hasRole('USER')">
                             <div class="dropdown-divider"></div>
-                            <a href="${contextPath}/my-books" class="dropdown-item">My Books</a>
-                            <a href="${contextPath}/saved-books" class="dropdown-item">Saved Books</a>
+                            <a href="${contextPath}/my-books" class="dropdown-item">
+                                <spring:message code="my-books.title"/>
+                            </a>
+                            <a href="${contextPath}/saved-books" class="dropdown-item">
+                                <spring:message code="saved-books.title"/>
+                            </a>
                         </sec:authorize>
 
                         <div class="dropdown-divider"></div>
-                            <a href="${contextPath}/logout" class="dropdown-item">Logout</a>
-                        </div>
-                    </li>
+                        <a href="${contextPath}/logout" class="dropdown-item">
+                            <spring:message code="logout"/>
+                        </a>
+                    </div>
+                </li>
+            </c:if>
 
-            </ul>
-        </c:if>
+        </ul>
+
 
     </div>
 
     <c:if test="${!isAuthenticated}">
-        <a id="login-btn" class="nav-link float-left m-0 p-0" href="${contextPath}/login">Login</a>
+        <a id="login-btn" class="nav-link float-left m-0 p-0" href="${contextPath}/login">
+            <spring:message code="login"/>
+        </a>
     </c:if>
 
 </nav>

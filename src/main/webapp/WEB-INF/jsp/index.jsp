@@ -7,12 +7,14 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
-    <title>Library</title>
+    <title><spring:message code="project.name"/></title>
 
     <jsp:include page="libs.jsp"/>
 </head>
+
 <body class="body text-center">
   
     <!-- Navigation bar -->
@@ -23,11 +25,15 @@
         <div id="cov-cont" class="cover-container d-flex h-100 p-3 mx-auto flex-column marg-b-5">
 
             <main role="main" class="inner cover">
-                <h1 class="cover-heading">Welcome to Library</h1>
-                <p class="lead">Read. Write. Share.</p>
+                <h1 class="cover-heading">
+                    <spring:message code="index.welcome"/>
+                </h1>
+                <p class="lead"><spring:message code="index.quote"/></p>
                 <p class="lead">
                     <sec:authorize access="!isAuthenticated()">
-                        <a href="${contextPath}/registration" class="btn btn-lg btn-secondary">Sign Up now</a>
+                        <a href="${contextPath}/registration" class="btn btn-lg btn-secondary">
+                            <spring:message code="index.btn.sing-up"/>
+                        </a>
                     </sec:authorize>
                 </p>
             </main>
@@ -39,4 +45,5 @@
     <jsp:include page="footer.jsp"/>
 
 </body>
+
 </html>

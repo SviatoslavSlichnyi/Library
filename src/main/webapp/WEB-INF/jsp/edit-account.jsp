@@ -2,19 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<sec:authentication var="currentUsername" property="principal.username"/>
+<c:set var="isMyAcocunt" value="${currentUsername eq user.username}"/>
+<spring:message var="accountTitle" code="account.title"/>
+<spring:message var="myAccountTitle" code="my-account.title"/>
+<c:set var="title" value="${isMyAcocunt ? myAccountTitle : accountTitle}"/>
 
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset='utf-8'>
-    <title>Library | Edit Account</title>
+    <title><spring:message code="project.name"/> | <spring:message code="edit-account"/></title>
 
     <jsp:include page="libs.jsp"/>
 </head>
-
 
 <body class="body">
 
@@ -40,9 +45,11 @@
             <div class="col-sm-9">
 
                 <h1 class="w-100">
-                    Account
+                    ${title}
                     <a href="${pageContext.request.contextPath}/my-account">
-                        <button type="button" class="btn btn-danger mt-2 float-right">Cancel</button>
+                        <button type="button" class="btn btn-danger mt-2 float-right">
+                            <spring:message code="simple.btn.cancel"/>
+                        </button>
                     </a>
                 </h1>
 
@@ -54,7 +61,9 @@
 
                             <spring:bind path="username">
                                 <div class="form-group">
-                                    <label for="username">Username</label>
+                                    <label for="username">
+                                        <spring:message code="user.form.username"/>
+                                    </label>
                                     <form:input path="username"
                                                 type="text"
                                                 id="username"
@@ -68,7 +77,9 @@
                             <div class="form-row">
                                 <spring:bind path="firstName">
                                     <div class="col form-group">
-                                        <label>First name </label>
+                                        <label>
+                                            <spring:message code="user.form.first-name"/>
+                                        </label>
                                         <div id="first-name-error" class="invalid-text"></div>
                                         <form:input path="firstName"
                                                     type="text"
@@ -81,7 +92,9 @@
 
                                 <spring:bind path="lastName">
                                     <div class="col form-group">
-                                        <label>Last name</label>
+                                        <label>
+                                            <spring:message code="user.form.last-name"/>
+                                        </label>
                                         <div id="last-name-error" class="invalid-text"></div>
                                         <form:input path="lastName"
                                                     type="text"
@@ -94,7 +107,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Email address</label>
+                                <label for="email">
+                                    <spring:message code="user.form.email"/>
+                                </label>
                                 <div id="error-email" class="invalid-text"></div>
                                 <input type="email"
                                        id="email"
@@ -107,9 +122,11 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <br>
-                                    <button class="btn btn-lg btn-success" type="submit">Save</button>
+                                    <button class="btn btn-lg btn-success" type="submit">
+                                        <spring:message code="simple.btn.save"/>
+                                    </button>
                                     <button class="btn btn-lg" type="reset" onclick="location.reload()">
-                                        Reset
+                                        <spring:message code="simple.btn.reset"/>
                                     </button>
                                 </div>
                             </div>

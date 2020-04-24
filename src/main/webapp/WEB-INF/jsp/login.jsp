@@ -6,14 +6,16 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset='utf-8'>
-    <title>Library | Login</title>
+    <title><spring:message code="project.name"/> | <spring:message code="login"/></title>
 
     <jsp:include page="libs.jsp"/>
     <script src="${contextPath}/resources/js/validation.js"></script>
 </head>
+
 <body class="body">
 
     <c:import url="/nav-bar"/>
@@ -23,20 +25,22 @@
             <div class="col-md-6">
                 <div class="card">
                     <header class="card-header">
-                        <h4 class="card-title mt-2">Login</h4>
+                        <h4 class="card-title mt-2"><spring:message code="login"/></h4>
                     </header>
                     <article class="card-body">
 
                         <c:if test="${param.error != null}">
                             <div id="error-bad-cread" class="alert alert-danger" role="alert">
-                                    Email or Password is wrong
+                                    <spring:message code="login.bad-credentials"/>
                             </div>
                         </c:if>
 
                         <form method="post" action="${contextPath}/login">
 
                                 <div class="form-group">
-                                    <label>Email</label>
+                                    <label>
+                                        <spring:message code="login.email"/>
+                                    </label>
                                     <input id="email"
                                            name="email"
                                            type="email"
@@ -45,7 +49,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Password</label>
+                                    <label><spring:message code="login.password"/></label>
                                     <input id="pwd"
                                            name="password"
                                            type="password"
@@ -54,13 +58,17 @@
                                 </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-lg btn-primary btn-block btn-signin">Login</button>
+                                <button type="submit" class="btn btn-lg btn-primary btn-block btn-signin">
+                                    <spring:message code="login"/>
+                                </button>
                             </div>
                         </form>
                     </article> <!-- card-body end .// -->
                     <div class="border-top card-body text-center">
-                        Don't have an account?
-                        <a href="${contextPath}/registration">Sign up</a></div>
+                        <spring:message code="login.not.registered"/>
+                        <a href="${contextPath}/registration">
+                            <spring:message code="sign-up"/>
+                        </a></div>
                 </div> <!-- card.// -->
             </div> <!-- col.//-->
 
@@ -71,4 +79,5 @@
     <jsp:include page="footer.jsp"/>
 
 </body>
+
 </html>

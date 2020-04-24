@@ -6,11 +6,11 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset='utf-8'>
-    <title>Library | Edit Book</title>
+    <title><spring:message code="project.name"/> | <spring:message code="edit-book.title"/></title>
 
     <jsp:include page="libs.jsp"/>
 </head>
@@ -32,7 +32,9 @@
                             <img class="avatar img-circle img-thumbnail wd-12r"
                                  src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png"
                                  alt="avatar">
-                            <h6 class="mt-3">Change the hardcover...</h6>
+                            <h6 class="mt-3">
+                                <spring:message code="edit-book.hardcover.change"/>
+                            </h6>
                         </div>
 
                         <spring:bind path="hardcoverFile">
@@ -64,11 +66,13 @@
                     <!-- Title -->
                     <div class="col-sm w-100">
                         <div class="w-50 fl-left">
-                            <h1>Book</h1>
+                            <h1><spring:message code="book-info.title"/></h1>
                         </div>
                         <div class="w-50 fl-left">
                             <a href="${contextPath}/book/${bookForm.id}">
-                                <button type="button" class="btn btn-danger mt-2 float-right">Cancel</button>
+                                <button type="button" class="btn btn-danger mt-2 float-right">
+                                    <spring:message code="simple.btn.cancel"/>
+                                </button>
                             </a>
                         </div>
                     </div>
@@ -82,7 +86,9 @@
                            <spring:bind path="name">
                                <div class="form-group">
                                    <div class="col-xs-6">
-                                       <label for="name"><h4>Name</h4></label>
+                                       <label for="name"><h4>
+                                           <spring:message code="book.form.title"/>
+                                       </h4></label>
                                        <form:input path="name"
                                                    type="text"
                                                    class="form-control ${status.error ? 'is-invalid' : ''}"
@@ -95,7 +101,9 @@
                            </spring:bind>
 
                             <div class="form-group">
-                                <label><h4>Author</h4></label>
+                                <label><h4>
+                                    <spring:message code="book.form.author"/>
+                                </h4></label>
                                 <div class="form-row w-100">
                                     <spring:bind path="authorFirstName">
                                         <div class="col-xs-6 w-50">
@@ -126,7 +134,9 @@
                             <spring:bind path="publisher">
                                 <div class="form-group">
                                     <div class="col-xs-6">
-                                        <label for="publisher"><h4>Publisher</h4></label>
+                                        <label for="publisher"><h4>
+                                            <spring:message code="book.form.publisher"/>
+                                        </h4></label>
                                         <form:input path="publisher"
                                                     type="text"
                                                     class="form-control ${status.error ? 'is-invalid' : ''}"
@@ -141,7 +151,9 @@
                             <spring:bind path="publicationYear">
                                 <div class="form-group">
                                     <div class="col-xs-6">
-                                        <label for="publication-year"><h4>Publication year</h4></label>
+                                        <label for="publication-year"><h4>
+                                            <spring:message code="book.form.publication-year"/>
+                                        </h4></label>
                                         <form:input path="publicationYear"
                                                     type="number"
                                                     class="form-control ${status.error ? 'is-invalid' : ''}"
@@ -156,7 +168,9 @@
                             <spring:bind path="numberOfPages">
                                 <div class="form-group">
                                     <div class="col-xs-6">
-                                        <label for="pages"><h4>Number of pages</h4></label>
+                                        <label for="pages"><h4>
+                                            <spring:message code="book.form.num-pages"/>
+                                        </h4></label>
                                         <form:input path="numberOfPages"
                                                     type="number"
                                                     class="form-control ${status.error ? 'is-invalid' : ''}"
@@ -171,7 +185,9 @@
                             <spring:bind path="language">
                                 <div class="form-group">
                                     <div class="col-xs-6">
-                                        <label for="language"><h4>Language</h4></label>
+                                        <label for="language"><h4>
+                                            <spring:message code="book.form.language"/>
+                                        </h4></label>
                                         <form:input path="language"
                                                     type="text"
                                                     class="form-control ${status.error ? 'is-invalid' : ''}"
@@ -186,7 +202,9 @@
                             <spring:bind path="description">
                                 <div class="form-group">
                                     <div class="col-xs-6">
-                                        <label for="description"><h4>Description</h4></label>
+                                        <label for="description"><h4>
+                                            <spring:message code="book.form.description"/>
+                                        </h4></label>
                                         <form:input path="description"
                                                     type="text"
                                                     class="form-control ${status.error ? 'is-invalid' : ''}"
@@ -201,7 +219,9 @@
                             <spring:bind path="bookFile">
                                 <div class="form-group">
                                     <div class="col-xs-6">
-                                        <label><h4>Book file</h4></label>
+                                        <label><h4>
+                                            <spring:message code="book.form.book-file"/>
+                                        </h4></label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <form:input path="bookFile"
@@ -214,7 +234,7 @@
                                             </div>
                                         </div>
                                         <div class="meta">
-                                            <a>Use only .pdf, .epub or .txt types of file.</a>
+                                            <a><spring:message code="add-book.form.book-file.warning"/></a>
                                         </div>
                                         <div class="text-danger text-center">
                                             <form:errors path="bookFile"/>
@@ -227,9 +247,11 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <br>
-                                    <button class="btn btn-lg btn-success" type="submit">Save</button>
+                                    <button class="btn btn-lg btn-success" type="submit">
+                                        <spring:message code="simple.btn.save"/>
+                                    </button>
                                     <button class="btn btn-lg" type="reset" onclick="location.reload()">
-                                        Reset
+                                        <spring:message code="simple.btn.reset"/>
                                     </button>
                                 </div>
                             </div>

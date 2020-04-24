@@ -4,13 +4,17 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <sec:authentication var="currentUsername" property="principal.username"/>
+<c:set var="isMyAcocunt" value="${currentUsername eq user.username}"/>
+<spring:message var="accountTitle" code="account.title"/>
+<spring:message var="myAccountTitle" code="my-account.title"/>
+<c:set var="title" value="${isMyAcocunt ? myAccountTitle : accountTitle}"/>
 
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset='utf-8'>
-    <title>Library | My Account</title>
+    <title><spring:message code="project.name"/> | ${title}</title>
 
     <jsp:include page="libs.jsp"/>
 </head>
@@ -39,10 +43,12 @@
             <div class="col-sm-9">
 
                 <h1 class="w-100">
-                    Account
-                    <c:if test="${currentUsername eq user.username}">
+                    ${title}
+                    <c:if test="${isMyAcocunt}">
                         <a href="${pageContext.request.contextPath}/my-account/edit">
-                            <button type="button" class="btn btn-secondary mt-2 fl-right">Edit</button>
+                            <button type="button" class="btn btn-secondary mt-2 fl-right">
+                                <spring:message code="simple.btn.edit"/>
+                            </button>
                         </a>
                     </c:if>
                 </h1>
@@ -54,7 +60,9 @@
 
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <h6 class="m-0 sub-title">Username</h6>
+                                <h6 class="m-0 sub-title">
+                                    <spring:message code="user.form.username"/>
+                                </h6>
                                 <h3 class="m-0">${user.username}</h3>
                             </div>
                         </div>
@@ -64,14 +72,18 @@
 
                                 <c:if test="${not empty user.firstName}">
                                     <div class="col-xs-6 w-50">
-                                        <h6 class="m-0 sub-title">First name</h6>
+                                        <h6 class="m-0 sub-title">
+                                            <spring:message code="user.form.first-name"/>
+                                        </h6>
                                         <h3 class="m-0">${user.firstName}</h3>
                                     </div>
                                 </c:if>
 
                                 <c:if test="${not empty user.lastName}">
                                     <div class="col-xs-6 w-50">
-                                        <h6 class="m-0 sub-title">Last name</h6>
+                                        <h6 class="m-0 sub-title">
+                                            <spring:message code="user.form.last-name"/>
+                                        </h6>
                                         <h3 class="m-0">${user.lastName}</h3>
                                     </div>
                                 </c:if>
@@ -80,7 +92,9 @@
 
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <h6 class="m-0 sub-title">Email</h6>
+                                <h6 class="m-0 sub-title">
+                                    <spring:message code="user.form.email"/>
+                                </h6>
                                 <h3 class="m-0">${user.email}</h3>
                             </div>
                         </div>

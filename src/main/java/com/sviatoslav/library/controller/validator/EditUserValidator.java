@@ -28,8 +28,7 @@ public class EditUserValidator implements Validator {
 
         if (!currentUsername.equals(username) && userService.existsByUsername(username)) {
             errors.rejectValue("username",
-                    "user.username.already-exists",
-                    String.format("Username \"%s\" id already registered.", username));
+                    "validator.user-form.username.already.exists");
         }
     }
 }
