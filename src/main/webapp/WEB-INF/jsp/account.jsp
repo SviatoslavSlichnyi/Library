@@ -21,8 +21,7 @@
 
 <body class="body">
 
-    <c:import url="/nav-bar"/>
-
+    <jsp:include page="nav-bar.jsp"/>
 
     <div class="container bootstrap snippet marg-b-5">
         <div class="row mt-4">

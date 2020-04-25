@@ -15,8 +15,8 @@
 </head>
 
 <body class="body">
-  
-    <c:import url="/nav-bar"/>
+
+    <jsp:include page="nav-bar.jsp"/>
 
     <div class="container mt-4 marg-b-cards">
 

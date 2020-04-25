@@ -18,7 +18,7 @@
 <body class="body text-center">
   
     <!-- Navigation bar -->
-    <c:import url="/nav-bar"/>
+    <jsp:include page="nav-bar.jsp"/>
 
     <!-- Welcome message -->
     <div class="container">
