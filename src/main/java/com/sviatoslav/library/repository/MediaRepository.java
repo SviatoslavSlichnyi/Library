@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface MediaRepository extends JpaRepository<Media, Long> {
     Optional<Media> findByName(String name);
+    boolean existsByName(String name);
 }

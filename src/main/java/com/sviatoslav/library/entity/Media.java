@@ -1,15 +1,13 @@
 package com.sviatoslav.library.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 
 @Entity
 public class Media {
@@ -23,13 +21,21 @@ public class Media {
     private String name;
 
     @NonNull
+    @Column(nullable = false)
     private String originalFilename;
 
     @NonNull
     @Column(nullable = false)
     private String contentType;
 
-    @NonNull
     @Lob
     private byte[] data;
+
+    public boolean isEmpty() {
+        if (data == null) {
+            return true;
+        } else {
+            return 0 == data.length;
+        }
+    }
 }

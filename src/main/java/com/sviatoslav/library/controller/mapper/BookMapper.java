@@ -2,51 +2,72 @@ package com.sviatoslav.library.controller.mapper;
 
 import com.sviatoslav.library.entity.Author;
 import com.sviatoslav.library.entity.Book;
-import com.sviatoslav.library.entity.BookForm;
 import com.sviatoslav.library.entity.Media;
+import com.sviatoslav.library.entity.User;
+import com.sviatoslav.library.entity.form.BookForm;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+@RequiredArgsConstructor
 
 @Component
+@Slf4j
 public class BookMapper {
 
-    public Book map(BookForm bookForm) {
-        Author author = Author.builder()
-                .firstName(bookForm.getAuthorFirstName())
-                .lastName(bookForm.getAuthorLastName())
-                .build();
-        author.generateAndSetId();
+    private final MediaMapper mediaMapper;
 
-        Media hardcoverFile = new MediaMapper().map(bookForm.getHardcoverFile());
-        Media bookFile = new MediaMapper().map(bookForm.getBookFile());
+    public Book map(Book book, BookForm bookForm) {
+        book.setName(bookForm.getName());
+        book.setPublisher(bookForm.getPublisher());
+        book.setPublicationYear(bookForm.getPublicationYear());
+        book.setNumberOfPages(bookForm.getNumberOfPages());
+        book.setLanguage(bookForm.getLanguage());
+        book.setDescription(bookForm.getDescription());
 
-        return Book.builder()
-                .id(bookForm.getId())
-                .name(bookForm.getName())
-                .author(author)
-                .publisher(bookForm.getPublisher())
-                .publicationYear(bookForm.getPublicationYear())
-                .numberOfPages(bookForm.getNumberOfPages())
-                .language(bookForm.getLanguage())
-                .description(bookForm.getDescription())
-                .hardcoverFile(hardcoverFile)
-                .bookFile(bookFile)
+        book.getAuthor().setFirstName(bookForm.getAuthorFirstName());
+        book.getAuthor().setLastName(bookForm.getAuthorLastName());
+
+        MultipartFile hardcoverFile = bookForm.getHardcoverFile();
+        if (!hardcoverFile.isEmpty()) {
+            log.debug("book.hardcover is empty");
+            book.setHardcoverFile(mediaMapper.map(hardcoverFile));
+        }
+
+        MultipartFile bookFile = bookForm.getBookFile();
+        if (!bookFile.isEmpty()) {
+            log.debug("book.bookFile is empty");
+            book.setBookFile(mediaMapper.map(bookFile));
+        }
+
+        return book;
+    }
+
+    public Book map(BookForm bookForm, User user) {
+        Book book = Book.builder()
+                .user(user)
+                .author(new Author())
+                .bookFile(new Media())
+                .hardcoverFile(new Media())
                 .build();
+
+        return map(book, bookForm);
     }
 
     public BookForm map(Book book) {
-        BookForm bookForm = new BookForm();
-        bookForm.setId(book.getId());
-        bookForm.setName(book.getName());
-        bookForm .setAuthorFirstName(book.getAuthor().getFirstName());
-        bookForm.setAuthorLastName(book.getAuthor().getLastName());
-        bookForm.setPublisher(book.getPublisher());
-        bookForm.setPublicationYear(book.getPublicationYear());
-        bookForm.setNumberOfPages(book.getNumberOfPages());
-        bookForm.setLanguage(book.getLanguage());
-        bookForm.setDescription(book.getDescription());
-        bookForm.setHardcoverFile(new MediaMapper().map(book.getHardcoverFile()));
-        bookForm.setBookFile(new MediaMapper().map(book.getBookFile()));
-
-        return bookForm;
+        return BookForm.builder()
+                .id(book.getId())
+                .name(book.getName())
+                .authorFirstName(book.getAuthor().getFirstName())
+                .authorLastName(book.getAuthor().getLastName())
+                .publisher(book.getPublisher())
+                .publicationYear(book.getPublicationYear())
+                .numberOfPages(book.getNumberOfPages())
+                .language(book.getLanguage())
+                .description(book.getDescription())
+                .hardcoverFile(mediaMapper.map(book.getHardcoverFile()))
+                .bookFile(mediaMapper.map(book.getBookFile()))
+                .build();
     }
 }

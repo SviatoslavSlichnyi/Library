@@ -2,39 +2,54 @@ package com.sviatoslav.library.controller.mapper;
 
 import com.sviatoslav.library.entity.Media;
 import com.sviatoslav.library.entity.MediaMultipartFile;
+import com.sviatoslav.library.service.MediaService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+@RequiredArgsConstructor
+
+@Component
 public class MediaMapper {
 
-    public Media map(MultipartFile multipartFile) {
-        Media media = new Media();
-        media.setName(generateFilename());
-        media.setOriginalFilename(multipartFile.getOriginalFilename());
-        media.setContentType(multipartFile.getContentType());
+    private final MediaService mediaService;
 
+    public Media map(MultipartFile multipartFile) {
+        String name = multipartFile.getName();
+        if (mediaService.existsByName(name)) {
+            return mediaService.findByName(name);
+        } else {
+            return buildMedia(multipartFile);
+        }
+    }
+
+    private Media buildMedia(MultipartFile multipartFile) {
+        Media media = Media.builder()
+                .name(generateFilename())
+                .originalFilename(multipartFile.getOriginalFilename())
+                .contentType(multipartFile.getContentType())
+                .build();
         try {
             media.setData(multipartFile.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return media;
     }
 
     public MultipartFile map(Media media) {
-        MediaMultipartFile mediaMultipartFile = new MediaMultipartFile();
-        mediaMultipartFile.setId(media.getId());
-        mediaMultipartFile.setName(media.getName());
-        mediaMultipartFile.setOriginalFilename(media.getOriginalFilename());
-        mediaMultipartFile.setContentType(media.getContentType());
-        mediaMultipartFile.setData(media.getData());
-        return mediaMultipartFile;
+        return MediaMultipartFile.builder()
+                .id(media.getId())
+                .name(media.getName())
+                .originalFilename(media.getOriginalFilename())
+                .contentType(media.getContentType())
+                .data(media.getData())
+                .build();
     }
 
     private String generateFilename() {
         return String.valueOf(System.nanoTime());
     }
-
 }

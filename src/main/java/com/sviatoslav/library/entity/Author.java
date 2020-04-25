@@ -2,9 +2,10 @@ package com.sviatoslav.library.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class Author {
 
     @Id
-    @EqualsAndHashCode.Exclude
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull
@@ -26,15 +27,6 @@ public class Author {
     @NonNull
     @NotNull
     private String lastName;
-
-    public Long getId() {
-        return (long) this.hashCode();
-    }
-
-    public void generateAndSetId() {
-        this.id = (long) hashCode();
-    }
-
 
     @Override
     public String toString() {

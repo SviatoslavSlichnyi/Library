@@ -1,5 +1,7 @@
 package com.sviatoslav.library.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,16 +13,14 @@ import java.io.InputStream;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MediaMultipartFile implements MultipartFile {
 
     private Long id;
-
     private String name;
-
     private String originalFilename;
-
     private String contentType;
-
     private byte[] data;
 
     public MediaMultipartFile(Media media) {
@@ -57,6 +57,6 @@ public class MediaMultipartFile implements MultipartFile {
 
     @Override
     public void transferTo(File dest) throws IllegalStateException {
-
+        throw new RuntimeException("This method is NOT written.");
     }
 }

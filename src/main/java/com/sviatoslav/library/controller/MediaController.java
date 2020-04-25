@@ -28,5 +28,4 @@ public class MediaController {
                 .contentType(MediaType.parseMediaType(media.getContentType()))
                 .body(new ByteArrayResource(media.getData()));
     }
-
 }
