@@ -34,8 +34,8 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"><spring:message code="nav-bar.language"/></a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="?language=en">en</a>
-                        <a class="dropdown-item" href="?language=ua">ua</a>
+                        <a class="dropdown-item" href="?lang=en">en</a>
+                        <a class="dropdown-item" href="?lang=ua">ua</a>
                     </div>
                 </li>
             </c:if>
