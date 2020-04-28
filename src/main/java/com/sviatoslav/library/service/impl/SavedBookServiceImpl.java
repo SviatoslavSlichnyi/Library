@@ -78,6 +78,11 @@ public class SavedBookServiceImpl implements SavedBookService {
     }
 
     @Override
+    public void deleteSavedBooksByUserId(Long userId) {
+        savedBookRepository.deleteSavedBooksByUser_Id(userId);
+    }
+
+    @Override
     public void deleteSavedBooksByBookId(Long id) {
         savedBookRepository.deleteSavedBooksByBook_Id(id);
     }

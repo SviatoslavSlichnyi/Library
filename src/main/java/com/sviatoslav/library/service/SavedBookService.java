@@ -19,5 +19,7 @@ public interface SavedBookService extends CrudService<SavedBook, Long> {
 
     void deleteSavedBooksByBookId(Long id);
 
+    void deleteSavedBooksByUserId(Long userId);
+
     void deleteByBookIdAndUserUsername(Long bookId, String username);
 }

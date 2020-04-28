@@ -2,6 +2,7 @@ package com.sviatoslav.library.controller;
 
 import com.sviatoslav.library.entity.User;
 import com.sviatoslav.library.entity.enumeration.UserRole;
+import com.sviatoslav.library.service.BookService;
 import com.sviatoslav.library.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ManageAccountsController {
 
     private final UserService userService;
+    private final BookService bookService;
 
     @GetMapping("/admin/manage-accounts")
     public String getManageAccountsPage(Model model) {
@@ -37,6 +39,7 @@ public class ManageAccountsController {
 
     @PostMapping("/admin/account/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
+        bookService.deleteFromBooksAndSavedBooksByUserId(id);
         userService.deleteById(id);
         return "redirect:/admin/manage-accounts";
     }

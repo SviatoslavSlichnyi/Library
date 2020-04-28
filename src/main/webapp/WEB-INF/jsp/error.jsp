@@ -24,9 +24,9 @@
 
             <main role="main" class="inner cover">
                 <h1 class="cover-heading">
-                    Error
+                    <spring:message code="error.title"/>
                 </h1>
-                <p class="lead">${errorMsg}</p>
+                <p class="lead"><spring:message code="error.msg"/></p>
             </main>
 
         </div>
