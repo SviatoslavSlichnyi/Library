@@ -9,7 +9,8 @@
 <c:set var="isLoginPage" value="${currentUri == (contextPath += '/login')}"/>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}">
+    <a class="navbar-brand"
+       href="${pageContext.request.contextPath}">
         <img src="https://cdn0.iconfinder.com/data/icons/education-and-learning-10/64/Books-512.png"
              width="30" height="30" class="d-inline-block align-top" alt="">
         Library
@@ -24,6 +25,18 @@
                         <spring:message code="nav-bar.tab.books"/>
                     </a>
                 </li>
+                <sec:authorize access="hasRole('USER')">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="${contextPath}/my-books" class="dropdown-item">
+                            <spring:message code="my-books.title"/>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="${contextPath}/saved-books" class="dropdown-item">
+                            <spring:message code="saved-books.title"/>
+                        </a>
+                    </li>
+                </sec:authorize>
             </ul>
         </c:if>
 
@@ -58,16 +71,6 @@
                             </a>
                             <a href="${contextPath}/admin/manage-books" class="dropdown-item">
                                 <spring:message code="manage-books.title"/>
-                            </a>
-                        </sec:authorize>
-
-                        <sec:authorize access="hasRole('USER')">
-                            <div class="dropdown-divider"></div>
-                            <a href="${contextPath}/my-books" class="dropdown-item">
-                                <spring:message code="my-books.title"/>
-                            </a>
-                            <a href="${contextPath}/saved-books" class="dropdown-item">
-                                <spring:message code="saved-books.title"/>
                             </a>
                         </sec:authorize>
 
